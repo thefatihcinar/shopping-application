@@ -13,6 +13,9 @@ namespace ShopApp.Entities
         public string Name { get; set; }
         public string ImageURL { get; set; }
         public decimal Price { get; set; }
+
+        public List<ProductCategory> ProductCategories { get; set; }
+        /* this products belongs to which categories */
         
     }
 }
