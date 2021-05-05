@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Entities
 {
-    class ProductCategory
+    public class ProductCategory
     {
         /* this table and class maps products with belonging categories */
 

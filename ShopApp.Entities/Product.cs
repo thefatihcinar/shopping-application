@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Entities
 {
-    class Product
+    public class Product
     {
         /* this is the model that we define Product */
         public int Id { get; set; }

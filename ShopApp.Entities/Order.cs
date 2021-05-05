@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Entities
 {
-    class Order
+    public class Order
     {
         /* this class represents an order */
     }
