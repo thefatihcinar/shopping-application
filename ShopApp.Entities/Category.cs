@@ -10,7 +10,7 @@ namespace ShopApp.Entities
     {
         /* this is the model that we define a category */
         
-        public int ID { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
     }

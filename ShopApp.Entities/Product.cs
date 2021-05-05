@@ -9,7 +9,7 @@ namespace ShopApp.Entities
     class Product
     {
         /* this is the model that we define Product */
-        public int ID { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
         public string ImageURL { get; set; }
         public decimal Price { get; set; }
