@@ -28,7 +28,11 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
         public void Delete(TypeEntity entity)
         {
-            throw new NotImplementedException();
+            using(var context = new TypeContext())
+            {
+                context.Set<TypeEntity>().Remove(entity);
+                context.SaveChanges();
+            }
         }
 
         public IQueryable<TypeEntity> GetAll(Expression<Func<TypeEntity, bool>> filter)
