@@ -11,6 +11,9 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 {
     public class EfCoreProductRepository : IProductRepository
     {
+        /* add database context */
+        ShopContext db = new ShopContext();
+
         public void Create(Product entity)
         {
             throw new NotImplementedException();
