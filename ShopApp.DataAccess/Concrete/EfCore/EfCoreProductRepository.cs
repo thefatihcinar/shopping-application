@@ -16,7 +16,8 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
         public void Create(Product entity)
         {
-            throw new NotImplementedException();
+            db.Products.Add(entity);
+            db.SaveChanges();
         }
 
         public void Delete(Product entity)
