@@ -58,7 +58,11 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
         public TypeEntity GetById(int id)
         {
-            throw new NotImplementedException();
+            // this method finds elements by given id
+            using (var context = new TypeContext())
+            {
+                return context.Set<TypeEntity>().Find(id);
+            }
         }
 
         public TypeEntity GetOne(Expression<Func<TypeEntity, bool>> filter)
