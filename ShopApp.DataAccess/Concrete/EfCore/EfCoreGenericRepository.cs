@@ -72,7 +72,12 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
         public void Update(TypeEntity entity)
         {
-            throw new NotImplementedException();
+            // this method will update an existing entity
+            using(var context = new TypeContext())
+            {
+                context.Entry(entity).State = EntityState.Modified;
+                context.SaveChanges();
+            }
         }
     }
 }
