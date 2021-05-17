@@ -15,7 +15,7 @@ namespace ShopApp.Business.Abstract
          */
         List<Product> GetAll();
 
-        Product GetById();
+        Product GetById(int id);
 
         void Create(Product entity);
 
