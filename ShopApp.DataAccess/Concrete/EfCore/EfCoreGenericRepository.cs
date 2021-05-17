@@ -35,9 +35,25 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             }
         }
 
-        public IQueryable<TypeEntity> GetAll(Expression<Func<TypeEntity, bool>> filter)
+        public IEnumerable<TypeEntity> GetAll(Expression<Func<TypeEntity, bool>> filter = null)
         {
-            throw new NotImplementedException();
+            /*
+                if there is no expression given, return all expression by default
+            */
+            using (var context = new TypeContext())
+            {
+                if(filter == null)
+                {
+                    // if there is no filter, return all
+                    return context.Set<TypeEntity>().ToList();
+                }
+                else
+                {
+                    // if there is a filter
+                    return context.Set<TypeEntity>().Where(filter).ToList();
+                }
+            }
+
         }
 
         public TypeEntity GetById(int id)
