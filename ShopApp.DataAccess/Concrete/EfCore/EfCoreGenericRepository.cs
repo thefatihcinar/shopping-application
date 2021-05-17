@@ -67,7 +67,10 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
         public TypeEntity GetOne(Expression<Func<TypeEntity, bool>> filter)
         {
-            throw new NotImplementedException();
+            using (var context = new TypeContext())
+            {
+                return context.Set<TypeEntity>().Where(filter).SingleOrDefault();
+            }
         }
 
         public void Update(TypeEntity entity)
