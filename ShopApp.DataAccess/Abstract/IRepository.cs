@@ -16,7 +16,7 @@ namespace ShopApp.DataAccess.Abstract
         Type GetOne(Expression<Func<Type, bool>> filter);
         /* get the first entity with a lambda expression */
 
-        IQueryable<Type> GetAll(Expression<Func<Type, bool>> filter = null);
+        IEnumerable<Type> GetAll(Expression<Func<Type, bool>> filter = null);
         /* get all entities with a lambda expression */
 
         void Create(Type entity);
