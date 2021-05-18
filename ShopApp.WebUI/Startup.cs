@@ -3,10 +3,13 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShopApp.DataAccess.Abstract;
+using ShopApp.DataAccess.Concrete.Memory;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+
 
 namespace ShopApp.WebUI
 {
@@ -23,6 +26,9 @@ namespace ShopApp.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddScoped<IProductRepository, MemoryProductRepository>();
+            // dependency injection: use MemoryProductRepository whenever I call IProductRepository
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
