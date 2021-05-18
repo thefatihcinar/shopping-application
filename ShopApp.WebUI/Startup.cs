@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ShopApp.Business.Abstract;
+using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
 using ShopApp.DataAccess.Concrete.Memory;
 using System;
@@ -29,6 +31,9 @@ namespace ShopApp.WebUI
 
             services.AddScoped<IProductRepository, MemoryProductRepository>();
             // dependency injection: use MemoryProductRepository whenever I call IProductRepository
+
+            services.AddScoped<IProductService, ProductManager>();
+            // dependency injection: use ProductManager whenever I call it IProductService
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
