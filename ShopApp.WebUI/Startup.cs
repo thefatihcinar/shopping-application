@@ -34,6 +34,9 @@ namespace ShopApp.WebUI
 
             services.AddScoped<IProductService, ProductManager>();
             // dependency injection: use ProductManager whenever I call it IProductService
+
+            services.AddMvc();
+            // USE MVC
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -53,12 +56,17 @@ namespace ShopApp.WebUI
 
             app.UseAuthorization();
 
+            app.UseMvcWithDefaultRoute();
+            
+            /*
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            */
+
         }
     }
 }
