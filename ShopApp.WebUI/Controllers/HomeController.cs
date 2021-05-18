@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using ShopApp.Business.Abstract;
 using ShopApp.WebUI.Models;
 using System;
 using System.Collections.Generic;
@@ -13,14 +14,19 @@ namespace ShopApp.WebUI.Controllers
     {
         private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private IProductService _productService;
+
+        public HomeController(ILogger<HomeController> logger, IProductService productService)
         {
             _logger = logger;
+
+            _productService = productService;
+            // here again dependency injection
         }
 
         public IActionResult Index()
         {
-            return View();
+            return View(_productService.GetAll());
         }
 
         public IActionResult Privacy()
