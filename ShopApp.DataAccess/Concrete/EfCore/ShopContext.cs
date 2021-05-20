@@ -19,6 +19,12 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             // This is the CONNECTION STRING
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<ProductCategory>()
+                        .HasKey(anItem => new { anItem.CategoryId, anItem.ProductId});
+        }
+
         public DbSet<Product> Products { get; set; }
 
         public DbSet<Category> Categories { get; set; }
