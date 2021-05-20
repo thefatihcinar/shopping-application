@@ -33,11 +33,23 @@ code .
 
 ## Migrations Commands
 
+__Apply the codes below in Data Access Layer.__
+
 ### Install Dotnet EF Core Tools to Use Migrations
 
 ```
 dotnet tool install --global dotnet-ef
 ```
 
+### Create a New Migration
 
+```
+dotnet ef migrations add InitialCreate
+```
+
+### Apply Migrations to the Database
+
+```
+dotnet ef database update
+```
 
