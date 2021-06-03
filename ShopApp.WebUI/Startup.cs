@@ -52,7 +52,9 @@ namespace ShopApp.WebUI
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
             app.UseStaticFiles();
+            // this means wwwroot is served / public
 
             app.UseRouting();
 
