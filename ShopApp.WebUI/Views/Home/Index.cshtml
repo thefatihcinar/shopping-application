@@ -5,16 +5,26 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-    
-    @foreach(var product in Model.Products)
-    {
-        <p>@product.Name</p>
-    }
 
-    @foreach(var category in Model.Categories){
-        <p>@category.Name</p>
-    }
+    <div class="row">
+        <div class="col-md-3">
+            <ul class="list-group">
+                @foreach (var category in Model.Categories)
+                {
+                    <li class="list-group-item">@category.Name</li>
+                }
+            </ul>
+            
+        </div>
+        <div class="col-md-9">
+            @foreach (var product in Model.Products)
+            {
+               <p>@product.Name</p>
+            }
+        </div>
+    </div>
+        
+    
+
 
 </div>
