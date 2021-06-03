@@ -8,6 +8,7 @@ using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
 using ShopApp.DataAccess.Concrete.EfCore;
 using ShopApp.DataAccess.Concrete.Memory;
+using ShopApp.WebUI.Middlewares;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -55,6 +56,9 @@ namespace ShopApp.WebUI
 
             app.UseStaticFiles();
             // this means wwwroot is served / public
+
+            app.CustomStaticFiles();
+            // use middleware to serve modules, custom static files
 
             app.UseRouting();
 
