@@ -37,6 +37,12 @@ namespace ShopApp.WebUI
             services.AddScoped<IProductService, ProductManager>();
             // dependency injection: use ProductManager whenever I call it IProductService
 
+            services.AddScoped<ICategoryRepository, EfCoreCategoryRepository>();
+            // dependency injection: use EfCategoryRepository whenever I call ICategoryRepository
+
+            services.AddScoped<ICategoryService, CategoryManager>();
+            // dependency injection: use CategoryManager whenever I call it ICategoryService
+
             services.AddMvc();
             // USE MVC
         }
