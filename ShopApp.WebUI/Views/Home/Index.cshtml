@@ -8,6 +8,13 @@
     <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
     
-    
+    @foreach(var product in Model.Products)
+    {
+        <p>@product.Name</p>
+    }
+
+    @foreach(var category in Model.Categories){
+        <p>@category.Name</p>
+    }
 
 </div>
