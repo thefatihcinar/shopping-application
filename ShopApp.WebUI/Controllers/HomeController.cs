@@ -16,11 +16,16 @@ namespace ShopApp.WebUI.Controllers
 
         private IProductService _productService;
 
-        public HomeController(ILogger<HomeController> logger, IProductService productService)
+        private ICategoryService _categoryService;
+
+        public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryService categoryService)
         {
             _logger = logger;
 
             _productService = productService;
+            // here again dependency injection
+
+            _categoryService = categoryService;
             // here again dependency injection
         }
 
