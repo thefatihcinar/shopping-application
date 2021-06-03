@@ -47,8 +47,6 @@ namespace ShopApp.WebUI
             {
                 app.UseDeveloperExceptionPage();
 
-                // seed the database with test data when starting the application
-                SeedDatabase.Seed();
             }
             else
             {
