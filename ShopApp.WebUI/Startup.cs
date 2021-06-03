@@ -30,7 +30,7 @@ namespace ShopApp.WebUI
         {
             services.AddControllersWithViews();
 
-            services.AddScoped<IProductRepository, MemoryProductRepository>();
+            services.AddScoped<IProductRepository, EfCoreProductRepository>();
             // dependency injection: use MemoryProductRepository whenever I call IProductRepository
 
             services.AddScoped<IProductService, ProductManager>();
