@@ -31,7 +31,13 @@ namespace ShopApp.WebUI.Controllers
 
         public IActionResult Index()
         {
-            return View(_productService.GetAll());
+            /* bring Products and Categories into Front-end */
+            var theProductListModel = new ProductListModel()
+            {
+                Products = _productService.GetAll(),
+                Categories = _categoryService.GetAll()
+            };
+            return View(theProductListModel);
         }
 
         public IActionResult Privacy()
