@@ -3,14 +3,14 @@
 <div class="col-md-4">
     <div class="card mb-3">
         <img src="~/img/@Model.ImageURL" alt="@Model.Name"
-             class="card-img-top p-3"/>
+             class="card-img-top p-3" />
 
         <div class="card-body">
             <h4 class="card-title">
-                <a href="#">@Model.Name</a>
+                <a asp-controller="shop" asp-action="details" asp-route-id="@Model.Id">@Model.Name</a>
             </h4>
             <h5>
-                @Model.Price <i class="fas fa-lira-sign"></i> 
+                @Model.Price <i class="fas fa-lira-sign"></i>
             </h5>
         </div>
 
