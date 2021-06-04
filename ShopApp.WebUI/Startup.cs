@@ -7,13 +7,11 @@ using ShopApp.Business.Abstract;
 using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
 using ShopApp.DataAccess.Concrete.EfCore;
-using ShopApp.DataAccess.Concrete.Memory;
 using ShopApp.WebUI.Middlewares;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 
 namespace ShopApp.WebUI
 {
@@ -53,7 +51,6 @@ namespace ShopApp.WebUI
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-
             }
             else
             {
@@ -71,16 +68,13 @@ namespace ShopApp.WebUI
             app.UseAuthorization();
 
             //app.UseMvcWithDefaultRoute();
-            
-            
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
-            
-
         }
     }
 }
