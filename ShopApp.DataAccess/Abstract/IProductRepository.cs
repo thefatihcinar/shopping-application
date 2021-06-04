@@ -8,9 +8,11 @@ using ShopApp.Entities;
 
 namespace ShopApp.DataAccess.Abstract
 {
-    public interface IProductRepository: IRepository<Product>
+    public interface IProductRepository : IRepository<Product>
     {
-        
+        Product GetProductDetails(int id);
 
+        /* this method will return the details of a products,
+         especially categories inside */
     }
 }
