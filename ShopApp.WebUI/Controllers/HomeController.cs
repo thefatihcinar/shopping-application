@@ -34,8 +34,7 @@ namespace ShopApp.WebUI.Controllers
             /* bring Products and Categories into Front-end */
             var theProductListModel = new ProductListModel()
             {
-                Products = _productService.GetAll(),
-                Categories = _categoryService.GetAll()
+                Products = _productService.GetAll()
             };
             return View(theProductListModel);
         }
