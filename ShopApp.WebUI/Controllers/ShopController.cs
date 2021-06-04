@@ -3,6 +3,7 @@ using ShopApp.Business.Abstract;
 using ShopApp.WebUI.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -50,7 +51,7 @@ namespace ShopApp.WebUI.Controllers
                 return NotFound();
             }
             // else go fetch the product with the given id
-            var theProduct = _productService.GetById((int)ID);
+            var theProduct = _productService.GetProductDetails((int)ID);
             // there might be NO PRODUCT with the given id
             if (theProduct == null)
             {
@@ -59,7 +60,13 @@ namespace ShopApp.WebUI.Controllers
             }
 
             // in this case, product found and valid
-            return View(theProduct);
+            // return ProductDetailModel which includes categories
+
+            return View(new ProductDetailsModel
+            {
+                Product = theProduct,
+                Categories = theProduct.ProductCategories.Select(prop => prop.Category).ToList()
+            });
         }
     }
 }
