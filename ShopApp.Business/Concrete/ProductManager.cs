@@ -14,12 +14,13 @@ namespace ShopApp.Business.Concrete
         /*
          * these are the concrete, real services product manager deliveres
         */
+
         // business layer is connected to the repository
         private IProductRepository __productRepository; // referans to the product repository interface
 
         public ProductManager(IProductRepository productRepository)
         {
-            __productRepository = productRepository; 
+            __productRepository = productRepository;
             // by injecting the concrete repository,
             // set the repository
         }
@@ -42,6 +43,11 @@ namespace ShopApp.Business.Concrete
         public Product GetById(int id)
         {
             return __productRepository.GetById(id);
+        }
+
+        public Product GetProductDetails(int id)
+        {
+            return __productRepository.GetProductDetails(id);
         }
 
         public void Update(Product entity)

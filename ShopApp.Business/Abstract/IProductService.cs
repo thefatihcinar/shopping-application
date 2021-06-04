@@ -13,15 +13,17 @@ namespace ShopApp.Business.Abstract
          * this is the services that product service offers
          * which operations can be done
          */
+
         List<Product> GetAll();
 
         Product GetById(int id);
+
+        Product GetProductDetails(int id);
 
         void Create(Product entity);
 
         void Update(Product entity);
 
         void Delete(Product entity);
-
     }
 }
