@@ -20,6 +20,8 @@ namespace ShopApp.Business.Abstract
 
         Product GetProductDetails(int id);
 
+        List<Product> GetProductsByCategory(string category);
+
         void Create(Product entity);
 
         void Update(Product entity);
