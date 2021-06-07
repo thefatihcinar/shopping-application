@@ -25,6 +25,12 @@ namespace ShopApp.Business.Concrete
             // set the repository
         }
 
+        public int CountByCategory(string category)
+        {
+            /* this method will return total number of products in a category */
+            return __productRepository.CountByCategory(category);
+        }
+
         public void Create(Product entity)
         {
             __productRepository.Create(entity);

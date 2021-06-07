@@ -19,5 +19,9 @@ namespace ShopApp.DataAccess.Abstract
 
         /* this method will return the products of a given cateogry
            and pagination operations */
+
+        int CountByCategory(string category);
+
+        /* this method will calculate number of items in a category */
     }
 }

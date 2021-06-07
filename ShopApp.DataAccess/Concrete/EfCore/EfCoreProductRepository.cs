@@ -12,6 +12,23 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 {
     public class EfCoreProductRepository : EfCoreGenericRepository<Product, ShopContext>, IProductRepository
     {
+        public int CountByCategory(string category)
+        {
+            /* this method will return number of products in a category */
+
+            using (var context = new ShopContext())
+            {
+                var allProducts = context.Products
+                                         .Include(entity => entity.ProductCategories)
+                                         .ThenInclude(entity => entity.Category)
+                                         .Where(item => item.ProductCategories.Any(item => item.Category.Name.ToLower() == category.ToLower()));
+
+                int numberOfProducts = allProducts.Count();
+
+                return numberOfProducts;
+            }
+        }
+
         public Product GetProductDetails(int id)
         {
             /* this method will return details of a product

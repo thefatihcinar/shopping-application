@@ -27,5 +27,9 @@ namespace ShopApp.Business.Abstract
         void Update(Product entity);
 
         void Delete(Product entity);
+
+        int CountByCategory(string category);
+
+        /* this method will return total number of products that belong to a category */
     }
 }
