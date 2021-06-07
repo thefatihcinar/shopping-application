@@ -28,10 +28,11 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             }
         }
 
-        public List<Product> GetProductsByCategory(string category)
+        public List<Product> GetProductsByCategory(string category, int page, int pageSize)
         {
             /*
              *  this method will return products with a given category
+             *  and makes pagination operations with a given page size
              */
 
             // connect to the database and get all products and then filter
@@ -51,7 +52,7 @@ namespace ShopApp.DataAccess.Concrete.EfCore
                                             item => item.ProductCategories.Any(item => item.Category.Name.ToLower() == category.ToLower()));
                 }
 
-                return products.ToList();
+                return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }
         }
     }
