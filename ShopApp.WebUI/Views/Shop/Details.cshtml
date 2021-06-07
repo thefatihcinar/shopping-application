@@ -12,7 +12,7 @@
         <!--Categories-->
         @foreach (var category in Model.Categories)
         {
-            <a href="#" class="btn btn-link p-0 mb-3">@category.Name</a>
+            <a href="/products/@category.Name.ToLower()" class="btn btn-link p-0 mb-3">@category.Name</a>
         }
 
         <div class="productPrice mb-3 mt-3">
