@@ -67,10 +67,14 @@ namespace ShopApp.WebUI
 
             app.UseAuthorization();
 
-            //app.UseMvcWithDefaultRoute();
-
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapControllerRoute(
+                    name: "products",
+                    pattern: "{products}/{category?}",
+                    defaults: new { controller = "shop", action = "list" }
+                    );
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
