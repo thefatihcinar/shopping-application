@@ -14,5 +14,9 @@ namespace ShopApp.DataAccess.Abstract
 
         /* this method will return the details of a products,
          especially categories inside */
+
+        List<Product> GetProductsByCategory(string category);
+
+        /* this method will return the products of a given cateogry */
     }
 }
