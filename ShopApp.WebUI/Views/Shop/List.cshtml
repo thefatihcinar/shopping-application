@@ -9,7 +9,6 @@
     <div class="row">
         <div class="col-md-3">
             @await Component.InvokeAsync("CategoryList")
-
         </div>
         <div class="col-md-9">
 
@@ -19,10 +18,8 @@
                     <partial name="_product" model="@product" />
                 }
             </div>
+
+            <div page-model="@Model.PaginationInformation"></div>
         </div>
     </div>
-
-
-
-
 </div>

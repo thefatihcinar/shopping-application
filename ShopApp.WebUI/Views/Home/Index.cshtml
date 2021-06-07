@@ -9,20 +9,17 @@
     <div class="row">
         <div class="col-md-3">
             @await Component.InvokeAsync("CategoryList")
-           
-            @*<ul class="list-group">
-                @foreach (var category in Model.Categories)
-                {
-                    <li class="list-group-item">@category.Name</li>
-                }
-            </ul>*@
-           
 
-            
+            @*<ul class="list-group">
+                    @foreach (var category in Model.Categories)
+                    {
+                        <li class="list-group-item">@category.Name</li>
+                    }
+                </ul>*@
         </div>
         <div class="col-md-9">
 
-            <partial name="_slider"/>
+            <partial name="_slider" />
 
             <div class="row">
                 @foreach (var product in Model.Products)
@@ -32,8 +29,4 @@
             </div>
         </div>
     </div>
-        
-    
-
-
 </div>
