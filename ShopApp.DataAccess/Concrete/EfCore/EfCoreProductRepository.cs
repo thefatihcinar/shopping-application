@@ -18,14 +18,22 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
             using (var context = new ShopContext())
             {
-                var allProducts = context.Products
+                if (String.IsNullOrEmpty(category))
+                {
+                    // return the number of all products
+                    return context.Products.Count();
+                }
+                else
+                {
+                    // if there is a category information provided
+                    var allProducts = context.Products
                                          .Include(entity => entity.ProductCategories)
                                          .ThenInclude(entity => entity.Category)
                                          .Where(item => item.ProductCategories.Any(item => item.Category.Name.ToLower() == category.ToLower()));
 
-                int numberOfProducts = allProducts.Count();
-
-                return numberOfProducts;
+                    int numberOfProducts = allProducts.Count();
+                    return numberOfProducts;
+                }
             }
         }
 
