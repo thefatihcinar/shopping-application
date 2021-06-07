@@ -50,9 +50,9 @@ namespace ShopApp.Business.Concrete
             return __productRepository.GetProductDetails(id);
         }
 
-        public List<Product> GetProductsByCategory(string category)
+        public List<Product> GetProductsByCategory(string category, int page, int pageSize)
         {
-            return __productRepository.GetProductsByCategory(category);
+            return __productRepository.GetProductsByCategory(category, page, pageSize);
         }
 
         public void Update(Product entity)
