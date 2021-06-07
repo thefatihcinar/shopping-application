@@ -28,14 +28,17 @@ namespace ShopApp.WebUI.Controllers
 
         // EX ROUTE: products/category?page=2
         [HttpGet]
-        public IActionResult List(string category)
+        public IActionResult List(string category, int page = 1)
         {
             /* this controller is for listing all the products in the app */
+            /* also makes pagination operations */
+
+            const int pageSize = 3; /* number of elements in a page */
 
             /* return all the products to the rendering */
             var allTheProducts = new ProductListModel()
             {
-                Products = _productService.GetProductsByCategory(category)
+                Products = _productService.GetProductsByCategory(category, page, pageSize)
             };
 
             return View(allTheProducts);
