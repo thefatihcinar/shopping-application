@@ -27,5 +27,32 @@ namespace ShopApp.DataAccess.Concrete.EfCore
                               .FirstOrDefault();
             }
         }
+
+        public List<Product> GetProductsByCategory(string category)
+        {
+            /*
+             *  this method will return products with a given category
+             */
+
+            // connect to the database and get all products and then filter
+            using (var context = new ShopContext())
+            {
+                var products = context.Products.AsQueryable();
+                // we will perform queries on this
+
+                // category string might be null or empty
+                if (!String.IsNullOrEmpty(category))
+                {
+                    // if there is a valid category, return all
+
+                    products = products.Include(entity => entity.ProductCategories)
+                                        .ThenInclude(entity => entity.Category)
+                                        .Where(
+                                            item => item.ProductCategories.Any(item => item.Category.Name.ToLower() == category.ToLower()));
+                }
+
+                return products.ToList();
+            }
+        }
     }
 }

@@ -11,23 +11,27 @@ namespace ShopApp.DataAccess.Abstract
     public interface IRepository<Type>
     {
         Type GetById(int id);
+
         /* get entity based on given id */
 
         Type GetOne(Expression<Func<Type, bool>> filter);
+
         /* get the first entity with a lambda expression */
 
         IEnumerable<Type> GetAll(Expression<Func<Type, bool>> filter = null);
+
         /* get all entities with a lambda expression */
 
         void Create(Type entity);
+
         /* create an entity */
 
         void Delete(Type entity);
+
         /* delete an entity */
 
         void Update(Type entity);
+
         /* update an entity */
-
-
     }
 }
