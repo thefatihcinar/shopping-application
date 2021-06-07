@@ -26,14 +26,16 @@ namespace ShopApp.WebUI.Controllers
             return View();
         }
 
-        public IActionResult List()
+        // EX ROUTE: products/category?page=2
+        [HttpGet]
+        public IActionResult List(string category)
         {
             /* this controller is for listing all the products in the app */
 
             /* return all the products to the rendering */
             var allTheProducts = new ProductListModel()
             {
-                Products = _productService.GetAll()
+                Products = _productService.GetProductsByCategory(category)
             };
 
             return View(allTheProducts);
