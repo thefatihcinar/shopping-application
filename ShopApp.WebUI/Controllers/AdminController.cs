@@ -8,9 +8,20 @@ namespace ShopApp.WebUI.Controllers
 {
     public class AdminController : Controller
     {
-        /* this is for admin pages */
+        [HttpGet]
+        [Route("/admin")]
         public IActionResult Index()
         {
+            return View();
+        }
+
+
+        [HttpGet]
+        [Route("/admin/add-product")]
+        public IActionResult AddProduct()
+        {
+            /* render add new product form to the screen */
+
             return View();
         }
     }
