@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewData["Title"] = "Add New Product";
+}
+
+<h1>Add New Product</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-controller="Admin" asp-action="AddProduct" type="submit">
+            <!--Product Name-->
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label adminLabel">Product Name</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="Name" value="" />
+                </div>
+            </div>
+
+            <!--Product Image URL-->
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label adminLabel">Image</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="ImageURL" value="" />
+                </div>
+            </div>
+
+            <!--Product Description-->
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label adminLabel">Description</label>
+                <div class="col-md-9">
+                    <textarea id="editor" class="form-control " name="Description"></textarea>
+                </div>
+            </div>
+
+            <!--Product Price-->
+            <div class="form-group row">
+                <label class="col-md-3 col-form-label adminLabel">Price</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="Price" value="" />
+                </div>
+            </div>
+
+            <!--Add New Product Button-->
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-6">
+                    <button type="submit" value="" class="btn btn-primary">Add Product</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

@@ -69,6 +69,7 @@ namespace ShopApp.WebUI
 
             app.UseEndpoints(endpoints =>
             {
+
                 endpoints.MapControllerRoute(
                     name: "products",
                     pattern: "{products}/{category?}",
