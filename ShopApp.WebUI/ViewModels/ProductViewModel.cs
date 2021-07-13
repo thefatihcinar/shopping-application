@@ -5,12 +5,11 @@ using System.Threading.Tasks;
 
 namespace ShopApp.WebUI.ViewModels
 {
-    public class ProductModel
+    public class ProductViewModel
     {
-        /* this is a ViewModel for Product entity */
+        /* this is a view model for Product entity */
         /* generally for front-end operations */
 
-        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
