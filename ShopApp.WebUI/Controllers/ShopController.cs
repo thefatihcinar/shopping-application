@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopApp.Business.Abstract;
-using ShopApp.WebUI.Models;
+using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -36,7 +36,7 @@ namespace ShopApp.WebUI.Controllers
             const int pageSize = 3; /* number of elements in a page */
 
             /* return all the products to the rendering */
-            var productListModel = new ProductListModel()
+            var productListModel = new ProductListViewModel()
             {
                 PaginationInformation = new PageInfo()
                 {
@@ -74,7 +74,7 @@ namespace ShopApp.WebUI.Controllers
             // in this case, product found and valid
             // return ProductDetailModel which includes categories
 
-            return View(new ProductDetailsModel
+            return View(new ProductDetailsViewModel
             {
                 Product = theProduct,
                 Categories = theProduct.ProductCategories.Select(prop => prop.Category).ToList()

@@ -24,7 +24,9 @@ namespace ShopApp.WebUI.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            return View();
+            return View(new ProductListViewModel() { 
+                Products = _productService.GetAll() 
+            });
         }
 
 

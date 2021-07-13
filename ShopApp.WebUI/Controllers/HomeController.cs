@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShopApp.Business.Abstract;
-using ShopApp.WebUI.Models;
+using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,7 +33,7 @@ namespace ShopApp.WebUI.Controllers
         public IActionResult Index()
         {
             /* bring Products and Categories into Front-end */
-            var theProductListModel = new ProductListModel()
+            var theProductListModel = new ProductListViewModel()
             {
                 Products = _productService.GetAll()
             };
