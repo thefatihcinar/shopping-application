@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using ShopApp.Business.Abstract;
 using ShopApp.Entities;
 using ShopApp.WebUI.ViewModels;
 using System;
@@ -12,10 +13,12 @@ namespace ShopApp.WebUI.Controllers
     public class AdminController : Controller
     {
         private readonly IMapper _mapper; // AutoMapper
+        private readonly IProductService _productService; 
 
-        public AdminController(IMapper mapper)
+        public AdminController(IProductService productService, IMapper mapper)
         {
             _mapper = mapper;
+            _productService = productService;
         }
 
         [HttpGet]
@@ -39,7 +42,10 @@ namespace ShopApp.WebUI.Controllers
         {
             /* add new product */
             Product product = _mapper.Map<Product>(model);
-            
+
+            _productService.Create(product);
+
+            return RedirectToAction("Index");
 
         }
     }
