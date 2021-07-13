@@ -22,7 +22,6 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpGet]
-        [Route("/admin")]
         public IActionResult Index()
         {
             return View();
