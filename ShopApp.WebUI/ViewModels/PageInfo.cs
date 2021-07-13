@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShopApp.WebUI.Models
+namespace ShopApp.WebUI.ViewModels
 {
     public class PageInfo
     {
