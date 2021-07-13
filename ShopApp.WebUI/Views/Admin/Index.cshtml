@@ -9,6 +9,43 @@
 <h1>Admin Products</h1>
 <hr />
 
+@if (Model.Products.Count() > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>Image</td>
+                <td>Name</td>
+                <td>Price</td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        <img src="~/img/@item.ImageURL" width="80" />
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm mr-2">Edit</a>
+                        <a class="btn btn-danger btn-sm">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="alert alert-warning">
+        <h4>No Products in the Database</h4>
+    </div>
+}
 
 
 
