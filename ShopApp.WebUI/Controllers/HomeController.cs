@@ -18,6 +18,8 @@ namespace ShopApp.WebUI.Controllers
 
         private ICategoryService _categoryService;
 
+        private const int pageSize = 6; // number of products per page
+
         public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryService categoryService)
         {
             _logger = logger;
@@ -30,12 +32,20 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [Route("/")]
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
+
             /* bring Products and Categories into Front-end */
             var theProductListModel = new ProductListViewModel()
             {
-                Products = _productService.GetAll()
+                PaginationInformation = new PageInfo
+                {
+                    TotalItems = _productService.GetAll().Count(),
+                    ItemsPerPage = pageSize,
+                    CurrentPage = page,
+                    CurrentCategory = null
+                },
+                Products = _productService.GetProductsByCategoryByPage(category: null ,page, pageSize)
             };
             return View(theProductListModel);
         }
