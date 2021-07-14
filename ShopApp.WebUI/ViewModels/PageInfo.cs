@@ -15,6 +15,8 @@ namespace ShopApp.WebUI.ViewModels
 
         public string CurrentCategory { get; set; }
 
+        public string BaseLink { get; set; }
+
         public int TotalPages()
         {
             return (int)Math.Ceiling((decimal)TotalItems / ItemsPerPage);
