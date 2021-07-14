@@ -252,5 +252,26 @@ namespace ShopApp.WebUI.Controllers
             return RedirectToAction("categories");
         }
 
+        [HttpPost]
+        [Route("categories/delete")]
+        public IActionResult DeleteCategory(int id)
+        {
+            // Go get the category with the given id
+            var category = _categoryService.GetById(id);
+
+            // there might be no category with the given id
+            if(category == null)
+            {
+                return NotFound();
+            }
+
+            // Delete the category
+            _categoryService.Delete(category);
+
+            // Signal the UI about the deletion
+            TempData["DeleteMessage"] = "The category has been successfully deleted.";
+
+            return RedirectToAction("categories");
+        }
     }
 }
