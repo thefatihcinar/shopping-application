@@ -5,6 +5,15 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+@section Scripts{ 
+    
+    <script src="~/modules/ckeditor/ckeditor.js"></script>
+    <script src="~/modules/ckeditor/ckeditor.js"></script>
+    <script>
+        CKEDITOR.replace("editor");
+    </script>
+}
+
 <h1>Edit Product</h1>
 <hr />
 
