@@ -146,11 +146,52 @@ namespace ShopApp.WebUI.Controllers
         {
             /* renders all categories */
 
+            /* fetch the last status here from tempdata */
+            // this might be called after creating something
+            if (TempData["CreationMessage"] != null)
+            {
+                ViewBag.CreationMessage = TempData["CreationMessage"];
+            }
+            // this might be called after deleting something
+            if (TempData["DeleteMessage"] != null)
+            {
+                ViewBag.DeleteMessage = TempData["DeleteMessage"];
+            }
+            // this might be called after updating something
+            if (TempData["UpdateMessage"] != null)
+            {
+                ViewBag.UpdateMessage = TempData["UpdateMessage"];
+            }
+
             var viewModel = new CategoryListViewModel()
             {
                 Categories = _categoryService.GetAll()
             };
             return View(viewModel);
         }
+
+        [HttpGet]
+        public IActionResult AddCategory()
+        {
+            /* renders new category page */
+
+            return View();
+        }
+
+        [HttpPost]
+        public IActionResult AddCategory(CategoryViewModel model)
+        {
+            // Convert View Model into an actual category to add
+            var newCategory = _mapper.Map<Category>(model);
+
+            // Add it to the database
+            _categoryService.Create(newCategory);
+
+            // Send message to the UI, indicating that the category has been added properly
+            TempData["CreationMessage"] = "New Category is successfully created.";
+
+            return RedirectToAction("categories");
+        }
+
     }
 }
