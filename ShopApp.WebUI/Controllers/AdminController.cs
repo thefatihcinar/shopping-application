@@ -26,7 +26,7 @@ namespace ShopApp.WebUI.Controllers
 
 
         [HttpGet]
-        [Route("/products")]
+        [Route("products")]
         public IActionResult Index()
         {
             /* fetch delete status here from tempdata */
@@ -54,7 +54,7 @@ namespace ShopApp.WebUI.Controllers
 
 
         [HttpGet]
-        [Route("/products/add")]
+        [Route("products/add")]
         public IActionResult AddProduct()
         {
             /* render add new product form to the screen */
@@ -63,7 +63,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpPost]
-        [Route("/products/add")]
+        [Route("products/add")]
         public IActionResult AddProduct(ProductViewModel model)
         {
             /* add new product */
