@@ -78,7 +78,7 @@ namespace ShopApp.WebUI
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
-
+                /*
                 endpoints.MapControllerRoute(
                     name: "products",
                     pattern: "{products}/{category?}",
@@ -96,6 +96,7 @@ namespace ShopApp.WebUI
                         defaults: new { controller = "admin", action = "editproduct"}
 
                     );
+                */
                
             });
 

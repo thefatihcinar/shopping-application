@@ -24,7 +24,9 @@ namespace ShopApp.WebUI.Controllers
             _categoryService = categoryService;
         }
 
+
         [HttpGet]
+        [Route("/products")]
         public IActionResult Index()
         {
             /* fetch delete status here from tempdata */
@@ -52,6 +54,7 @@ namespace ShopApp.WebUI.Controllers
 
 
         [HttpGet]
+        [Route("/products/add")]
         public IActionResult AddProduct()
         {
             /* render add new product form to the screen */
@@ -60,6 +63,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpPost]
+        [Route("/products/add")]
         public IActionResult AddProduct(ProductViewModel model)
         {
             /* add new product */
@@ -74,6 +78,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpGet]
+        [Route("products/{id?}")]
         public IActionResult EditProduct(int? id)
         {
             if(id == null)
@@ -98,6 +103,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpPost]
+        [Route("/admin/products/{id}")]
         public IActionResult EditProduct(ProductViewModel model)
         {
             // Go get the product with this given id
