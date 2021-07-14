@@ -27,7 +27,7 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpGet]
         [Route("products")]
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
             /* fetch delete status here from tempdata */
             // this might be called after deleting something
@@ -46,9 +46,18 @@ namespace ShopApp.WebUI.Controllers
                 ViewBag.UpdateMessage = TempData["UpdateMessage"].ToString();
             }
 
+            const int pageSize = 5; // only 5 products in admin page
 
-            return View(new ProductListViewModel() { 
-                Products = _productService.GetAll() 
+            return View(new ProductListViewModel() {
+                PaginationInformation = new PageInfo()
+                {
+                    TotalItems = _productService.GetAll().Count(),
+                    ItemsPerPage = pageSize,
+                    CurrentPage = page,
+                    CurrentCategory = null,
+                    BaseLink = "/admin/products"
+                },
+                Products = _productService.GetProductsByCategoryByPage(null, page, pageSize)
             });
         }
 
