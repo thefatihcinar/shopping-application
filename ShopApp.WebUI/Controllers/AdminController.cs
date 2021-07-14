@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.WebUI.Controllers
 {
+    [Route("admin")]
     public class AdminController : Controller
     {
         private readonly IMapper _mapper; // AutoMapper
@@ -142,6 +143,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpGet]
+        [Route("categories")]
         public IActionResult Categories()
         {
             /* renders all categories */
@@ -171,6 +173,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpGet]
+        [Route("categories/add")]
         public IActionResult AddCategory()
         {
             /* renders new category page */
@@ -179,6 +182,7 @@ namespace ShopApp.WebUI.Controllers
         }
 
         [HttpPost]
+        [Route("categories/add")]
         public IActionResult AddCategory(CategoryViewModel model)
         {
             // Convert View Model into an actual category to add
@@ -189,6 +193,61 @@ namespace ShopApp.WebUI.Controllers
 
             // Send message to the UI, indicating that the category has been added properly
             TempData["CreationMessage"] = "New Category is successfully created.";
+
+            return RedirectToAction("categories");
+        }
+
+        [HttpGet]
+        [Route("categories/{id?}")]
+        public IActionResult EditCategory(int? id)
+        {
+            /* render edit page with a given category id */
+
+            // Go get the category with the given id
+            // in order to render to the screen 
+
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var category = _categoryService.GetById((int) id);
+
+            // the category still might be nul
+            if(category == null)
+            {
+                return NotFound();
+            }
+
+            // Create a View Model from Category
+            var categoryViewModel = _mapper.Map<CategoryViewModel>(category);
+
+            return View(categoryViewModel);
+        }
+
+        [HttpPost]
+        [Route("categories/{id}")]
+        public IActionResult EditCategory(CategoryViewModel model)
+        {
+            /* update this category */
+
+            // Go find the category with a given id
+            var old = _categoryService.GetById(model.Id);
+
+            // there might be no category with this given id
+            if(old == null)
+            {
+                return NotFound();
+            }
+
+            // create an actual object from view model
+            var updated = _mapper.Map<Category>(model);
+
+            // Update it 
+            _categoryService.Update(updated);
+
+            // Signal to the UI about the Update
+            TempData["UpdateMessage"] = "The category has been successfully updated.";
 
             return RedirectToAction("categories");
         }

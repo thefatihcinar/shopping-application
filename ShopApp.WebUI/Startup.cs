@@ -96,27 +96,7 @@ namespace ShopApp.WebUI
                         defaults: new { controller = "admin", action = "editproduct"}
 
                     );
-                endpoints.MapControllerRoute(
-                        name: "adminCategories",
-                        pattern: "admin/categories",
-                        defaults: new { controller = "admin", action = "categories" }
-                    );
-                endpoints.MapControllerRoute(
-                        name: "adminAddCategory",
-                        pattern: "admin/category/add",
-                        defaults: new { controller = "admin", action = "addcategory" }
-                    );
-
-                endpoints.MapControllerRoute(
-                        name: "adminEditCategory",
-                        pattern: "admin/category/edit",
-                        defaults: new { controller = "admin", action = "editcategory" }
-                    );
-                endpoints.MapControllerRoute(
-                        name: "adminDeleteCategory",
-                        pattern: "admin/category/delete",
-                        defaults: new { controller = "admin", action = "deletecategory" }
-                    );
+               
             });
 
         }
