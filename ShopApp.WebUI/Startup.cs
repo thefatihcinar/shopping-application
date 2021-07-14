@@ -84,6 +84,18 @@ namespace ShopApp.WebUI
                     pattern: "{products}/{category?}",
                     defaults: new { controller = "shop", action = "list" }
                     );
+
+                endpoints.MapControllerRoute(
+                        name: "adminProducts",
+                        pattern: "admin/products",
+                        defaults: new { controller = "admin", action = "index"}
+                    );
+                endpoints.MapControllerRoute(
+                        name: "adminProducts",
+                        pattern: "admin/products/{id?}",
+                        defaults: new { controller = "admin", action = "editproduct"}
+
+                    );
             });
 
         }
