@@ -8,6 +8,26 @@
 <h1>Admin Categories</h1>
 <hr />
 
+@if (ViewBag.CreationMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.CreationMessage
+    </div>
+}
+@if (ViewBag.UpdateMessage != null)
+{ 
+    <div class="alert alert-primary" role="alert">
+        @ViewBag.UpdateMessage  
+    </div>
+}
+@if(ViewBag.DeleteMessage != null) 
+{
+    <div class="alert alert-danger" role="alert">
+        @ViewBag.DeleteMessage
+    </div>
+}
+
+
 @if (Model.Categories.Count() > 0)
 {
     // render categories
