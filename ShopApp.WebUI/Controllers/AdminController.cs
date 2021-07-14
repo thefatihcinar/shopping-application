@@ -13,12 +13,14 @@ namespace ShopApp.WebUI.Controllers
     public class AdminController : Controller
     {
         private readonly IMapper _mapper; // AutoMapper
-        private readonly IProductService _productService; 
+        private readonly IProductService _productService;
+        private readonly ICategoryService _categoryService;
 
-        public AdminController(IProductService productService, IMapper mapper)
+        public AdminController(IProductService productService, ICategoryService categoryService, IMapper mapper)
         {
             _mapper = mapper;
             _productService = productService;
+            _categoryService = categoryService;
         }
 
         [HttpGet]
@@ -137,6 +139,18 @@ namespace ShopApp.WebUI.Controllers
             TempData["DeleteMessage"] = "The product has been deleted successfully.";
 
             return RedirectToAction("index");
+        }
+
+        [HttpGet]
+        public IActionResult Categories()
+        {
+            /* renders all categories */
+
+            var viewModel = new CategoryListViewModel()
+            {
+                Categories = _categoryService.GetAll()
+            };
+            return View(viewModel);
         }
     }
 }
