@@ -10,6 +10,7 @@ namespace ShopApp.WebUI.ViewModels
         /* this is a view model for Product entity */
         /* generally for front-end operations */
 
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public string Description { get; set; }
