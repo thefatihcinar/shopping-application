@@ -13,6 +13,8 @@ namespace ShopApp.WebUI
         public AutoMapping()
         {
             CreateMap<ProductViewModel, Product>(); // ProductVM -> Product
-        }
+
+            CreateMap<Product, ProductViewModel>(); // Product -> ProductVM
+         }
     }
 }
