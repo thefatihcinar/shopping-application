@@ -15,6 +15,10 @@ namespace ShopApp.Business.Abstract
 
         List<Category> GetAll();
 
+        List<Category> GetCategoriesByPage(int page, int pageSize);
+        /* this will return categories based on the interval provided */
+        /* i.e. pagination */
+
         Category GetById(int id);
 
         void Create(Category entity);

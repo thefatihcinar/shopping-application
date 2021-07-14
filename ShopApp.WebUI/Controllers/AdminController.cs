@@ -159,7 +159,7 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpGet]
         [Route("categories")]
-        public IActionResult Categories()
+        public IActionResult Categories(int page = 1)
         {
             /* renders all categories */
 
@@ -180,10 +180,21 @@ namespace ShopApp.WebUI.Controllers
                 ViewBag.UpdateMessage = TempData["UpdateMessage"];
             }
 
+            const int pageSize = 3;
+
             var viewModel = new CategoryListViewModel()
             {
-                Categories = _categoryService.GetAll()
+                PaginationInformation = new PageInfo
+                {
+                    TotalItems = _categoryService.GetAll().Count(),
+                    ItemsPerPage = pageSize,
+                    CurrentPage = page,
+                    CurrentCategory = null,
+                    BaseLink = "/admin/categories"
+                },
+                Categories = _categoryService.GetCategoriesByPage(page, pageSize)
             };
+
             return View(viewModel);
         }
 

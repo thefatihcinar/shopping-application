@@ -39,6 +39,11 @@ namespace ShopApp.Business.Concrete
             return __categoryRepository.GetAll().ToList();
         }
 
+        public List<Category> GetCategoriesByPage(int page, int pageSize)
+        {
+            return __categoryRepository.GetCategoriesByPage(page, pageSize);
+        }
+
         public Category GetById(int id)
         {
             return __categoryRepository.GetById(id);

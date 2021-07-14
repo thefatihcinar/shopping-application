@@ -15,12 +15,12 @@
     </div>
 }
 @if (ViewBag.UpdateMessage != null)
-{ 
+{
     <div class="alert alert-primary" role="alert">
-        @ViewBag.UpdateMessage  
+        @ViewBag.UpdateMessage
     </div>
 }
-@if(ViewBag.DeleteMessage != null) 
+@if (ViewBag.DeleteMessage != null)
 {
     <div class="alert alert-danger" role="alert">
         @ViewBag.DeleteMessage
@@ -65,3 +65,5 @@ else
         <h5>No Categories Found in the Database</h5>
     </div>
 }
+
+<div page-model="@Model.PaginationInformation"></div>
