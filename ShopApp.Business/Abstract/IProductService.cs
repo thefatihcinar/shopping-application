@@ -20,7 +20,7 @@ namespace ShopApp.Business.Abstract
 
         Product GetProductDetails(int id);
 
-        List<Product> GetProductsByCategory(string category, int page, int pageSize);
+        List<Product> GetProductsByCategoryByPage(string? category, int page, int pageSize);
 
         void Create(Product entity);
 

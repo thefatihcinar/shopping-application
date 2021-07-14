@@ -53,7 +53,7 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             }
         }
 
-        public List<Product> GetProductsByCategory(string category, int page, int pageSize)
+        public List<Product> GetProductsByCategoryByPage(string? category, int page, int pageSize)
         {
             /*
              *  this method will return products with a given category
@@ -75,6 +75,12 @@ namespace ShopApp.DataAccess.Concrete.EfCore
                                         .ThenInclude(entity => entity.Category)
                                         .Where(
                                             item => item.ProductCategories.Any(item => item.Category.Name.ToLower() == category.ToLower()));
+                }
+                else
+                {
+                    // if there is not a category information that is provided,
+                    // return all the products
+                    
                 }
 
                 return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
