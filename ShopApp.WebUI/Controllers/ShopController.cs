@@ -28,6 +28,7 @@ namespace ShopApp.WebUI.Controllers
 
         // EX ROUTE: products/category?page=2
         [HttpGet]
+        [Route("products/{category?}")]
         public IActionResult List(string category, int page = 1)
         {
             /* this controller is for listing all the products in the app */
