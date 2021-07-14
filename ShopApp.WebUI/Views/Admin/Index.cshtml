@@ -9,6 +9,27 @@
 <h1>Admin Products</h1>
 <hr />
 
+@if (ViewBag.DeleteMessage != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.DeleteMessage
+    </div>
+}
+
+@if (ViewBag.CreationMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.CreationMessage
+    </div>
+}
+
+@if (ViewBag.UpdateMessage != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @ViewBag.UpdateMessage
+    </div>
+}
+
 @if (Model.Products.Count() > 0)
 {
     <table class="table table-bordered">
@@ -28,11 +49,15 @@
                     <td>
                         <img src="~/img/@item.ImageURL" width="80" />
                     </td>
-                    <td>@item.Name</td>
+                    <td><strong>@item.Name</strong></td>
                     <td>@item.Price</td>
                     <td>
                         <a class="btn btn-primary btn-sm mr-2" href="/admin/products/@item.Id">Edit</a>
-                        <a class="btn btn-danger btn-sm">Delete</a>
+                        <form asp-controller="admin" asp-action="deleteproduct" method="post" style="display: inline;">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm" value="">Delete</button>
+                        </form>
+
                     </td>
                 </tr>
             }
