@@ -46,7 +46,7 @@ namespace ShopApp.WebUI.Controllers
                     CurrentPage = page,
                     CurrentCategory = category
                 },
-                Products = _productService.GetProductsByCategory(category, page, pageSize)
+                Products = _productService.GetProductsByCategoryByPage(category, page, pageSize)
             };
 
             return View(productListModel);
