@@ -24,6 +24,24 @@ namespace ShopApp.WebUI.Controllers
         [HttpGet]
         public IActionResult Index()
         {
+            /* fetch delete status here from tempdata */
+            // this might be called after deleting something
+            if(TempData["DeleteMessage"] != null)
+            {
+                ViewBag.DeleteMessage = TempData["DeleteMessage"].ToString();
+            }
+            // this might be called afeter adding something
+            if(TempData["CreationMessage"] != null)
+            {
+                ViewBag.CreationMessage = TempData["CreationMessage"].ToString();
+            }
+            // this might be called afeter updating something
+            if (TempData["UpdateMessage"] != null)
+            {
+                ViewBag.UpdateMessage = TempData["UpdateMessage"].ToString();
+            }
+
+
             return View(new ProductListViewModel() { 
                 Products = _productService.GetAll() 
             });
@@ -45,6 +63,8 @@ namespace ShopApp.WebUI.Controllers
             Product product = _mapper.Map<Product>(model);
 
             _productService.Create(product);
+
+            TempData["CreationMessage"] = "The product is created successfully.";
 
             return RedirectToAction("Index");
 
@@ -92,6 +112,29 @@ namespace ShopApp.WebUI.Controllers
             theProduct = _mapper.Map<Product>(model);
 
             _productService.Update(theProduct);
+
+            // bring it to UI
+            TempData["UpdateMessage"] = "The product has been successfully updated. You can check it out.";
+
+            return RedirectToAction("index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteProduct(int id)
+        {
+            // get the product with the given id 
+            var product = _productService.GetById(id);
+
+            // there might be no product
+            if(product == null)
+            {
+                return NotFound();
+            }
+
+            // delete the product
+            _productService.Delete(product);
+
+            TempData["DeleteMessage"] = "The product has been deleted successfully.";
 
             return RedirectToAction("index");
         }
