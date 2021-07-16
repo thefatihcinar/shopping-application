@@ -1,11 +1,12 @@
 ﻿@model ProductViewModel
 
 @{
-    ViewData["Title"] = "Add New Product";
+    ViewData["Title"] = "EditProduct";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Scripts{
-
+@section Scripts{ 
+    
     <script src="~/modules/ckeditor/ckeditor.js"></script>
     <script src="~/modules/ckeditor/ckeditor.js"></script>
     <script>
@@ -13,18 +14,20 @@
     </script>
 }
 
-<h1>Add New Product</h1>
-
+<h1>Edit Product</h1>
 <hr />
 
 <div class="row">
     <div class="col-md-8">
-        <form asp-controller="Admin" asp-action="AddProduct" type="submit">
+        <form asp-controller="Admin" asp-action="EditProduct" type="submit">
+            <!--Product ID-->
+            <input type="hidden" value="@Model.Id" name="Id"/>
+
             <!--Product Name-->
             <div class="form-group row">
                 <label asp-for="Name" class="col-md-3 col-form-label adminLabel">Product Name</label>
                 <div class="col-md-9">
-                    <input asp-for="Name" class="form-control" name="Name" value="" />
+                    <input asp-for="Name" class="form-control" name="Name" value= "@Model.Name" />
                 </div>
             </div>
 
@@ -32,7 +35,7 @@
             <div class="form-group row">
                 <label asp-for="ImageURL" class="col-md-3 col-form-label adminLabel">Image</label>
                 <div class="col-md-9">
-                    <input asp-for="ImageURL" type="text" class="form-control" name="ImageURL" value="" />
+                    <input asp-for="ImageURL" type="text" class="form-control" name="ImageURL" value="@Model.ImageURL" />
                 </div>
             </div>
 
@@ -40,7 +43,8 @@
             <div class="form-group row">
                 <label asp-for="Description" class="col-md-3 col-form-label adminLabel">Description</label>
                 <div class="col-md-9">
-                    <textarea asp-for="Description" id="editor" class="form-control " name="Description"></textarea>
+                    <textarea asp-for="Description" id="editor" class="form-control " name="Description"
+                              value="@Model.Description"></textarea>
                 </div>
             </div>
 
@@ -48,14 +52,14 @@
             <div class="form-group row">
                 <label asp-for="Price" class="col-md-3 col-form-label adminLabel">Price</label>
                 <div class="col-md-9">
-                    <input asp-for="Price" type="text" class="form-control" name="Price" value="" />
+                    <input asp-for="Price" type="text" class="form-control" name="Price" value="@Model.Price" />
                 </div>
             </div>
 
             <!--Add New Product Button-->
             <div class="form-group row">
                 <div class="col-md-10 offset-md-6">
-                    <button type="submit" value="Add Product" class="btn btn-primary">Add Product</button>
+                    <button type="submit" value="Save" class="btn btn-primary">Save</button>
                 </div>
             </div>
 

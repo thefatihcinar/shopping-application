@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShopApp.WebUI.Models
+namespace ShopApp.WebUI.ViewModels
 {
-    public class ProductDetailsModel
+    public class ProductDetailsViewModel
     {
         /* this model will be used to render products and categories to the screen */
 

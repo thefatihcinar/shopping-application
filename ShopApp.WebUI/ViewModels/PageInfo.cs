@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ShopApp.WebUI.Models
+namespace ShopApp.WebUI.ViewModels
 {
     public class PageInfo
     {
@@ -14,6 +14,8 @@ namespace ShopApp.WebUI.Models
         public int CurrentPage { get; set; }
 
         public string CurrentCategory { get; set; }
+
+        public string BaseLink { get; set; }
 
         public int TotalPages()
         {

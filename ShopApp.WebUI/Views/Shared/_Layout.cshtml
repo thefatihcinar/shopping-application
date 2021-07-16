@@ -10,15 +10,17 @@
     <link href="~/css/styles.css" rel="stylesheet" />
     <link href="~/css/admin.css" rel="stylesheet" />
 </head>
-    <body>
-        <partial name="_navbar"/>
+<body>
+    <partial name="_navbar" />
 
-        <div class="container pt-100 mb-5">
-            @RenderBody()
-        </div>
+    <div class="container pt-100 mb-5">
+        @RenderBody()
+    </div>
 
-        <script src="~/modules/jquery/dist/jquery.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-        <script src="~/modules/bootstrap/dist/js/bootstrap.min.js"></script>
-    </body>
+    <script src="~/modules/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="~/modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    @RenderSection("Scripts", false)
+</body>
 </html>

@@ -3,9 +3,7 @@
         <a class="navbar-brand" href="/">Magic Store</a>
 
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-                <a href="#" class="nav-link active">Home</a>
-            </li>
+
             <li class="nav-item">
                 <a href="/products" class="nav-link">Products</a>
             </li>
@@ -15,17 +13,18 @@
             <li class="nav-item">
                 <a href="#" class="nav-link">Orders</a>
             </li>
+
             <li class="nav-item">
-                <a asp-controller="Admin" asp-action="AddProduct" class="nav-link">Add Product</a>
+                <a asp-controller="admin" asp-action="index" class="nav-link">Admin Products</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Admin Products</a>
+                <a asp-controller="admin" asp-action="addproduct" class="nav-link">Add Product</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Add Category</a>
+                <a asp-controller="admin" asp-action="categories" class="nav-link">Admin Categories</a>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">Admin Categories</a>
+                <a asp-controller="admin" asp-action="addcategory" class="nav-link">Add Category</a>
             </li>
         </ul>
         <ul class="navbar-nav mr-auto logNavBar">

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Razor.TagHelpers;
-using ShopApp.WebUI.Models;
+using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,7 +27,7 @@ namespace ShopApp.WebUI.TagHelpers
 
                 if (string.IsNullOrEmpty(PageModel.CurrentCategory))
                 {
-                    stringBuilder.AppendFormat("<a class='page-link' href='/products?page={0}'>{0}</a>", page);
+                    stringBuilder.AppendFormat("<a class='page-link' href='{1}?page={0}'>{0}</a>", page, PageModel.BaseLink);
                 }
                 else
                 {

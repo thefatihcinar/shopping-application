@@ -1,0 +1,32 @@
+﻿@model CategoryViewModel
+
+@{
+    ViewData["Title"] = "AddCategory";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Add Category</h1>
+
+<hr />
+
+<div class="row">
+    <div class="col-md-8">
+        <form asp-controller="Admin" asp-action="AddCategory" type="submit">
+            <!--Category Name-->
+            <div class="form-group row">
+                <label asp-for="Name" class="col-md-3 col-form-label adminLabel">Category Name</label>
+                <div class="col-md-9">
+                    <input asp-for="Name" class="form-control" name="Name" value="" />
+                </div>
+            </div>
+
+            <!--Add New Category Button-->
+            <div class="form-group row">
+                <div class="col-md-10 offset-md-6">
+                    <button type="submit" value="New Category" class="btn btn-primary">New Category</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>

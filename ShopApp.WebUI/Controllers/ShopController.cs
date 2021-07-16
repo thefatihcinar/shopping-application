@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopApp.Business.Abstract;
-using ShopApp.WebUI.Models;
+using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -28,6 +28,7 @@ namespace ShopApp.WebUI.Controllers
 
         // EX ROUTE: products/category?page=2
         [HttpGet]
+        [Route("products/{category?}")]
         public IActionResult List(string category, int page = 1)
         {
             /* this controller is for listing all the products in the app */
@@ -36,7 +37,7 @@ namespace ShopApp.WebUI.Controllers
             const int pageSize = 3; /* number of elements in a page */
 
             /* return all the products to the rendering */
-            var productListModel = new ProductListModel()
+            var productListModel = new ProductListViewModel()
             {
                 PaginationInformation = new PageInfo()
                 {
@@ -45,7 +46,7 @@ namespace ShopApp.WebUI.Controllers
                     CurrentPage = page,
                     CurrentCategory = category
                 },
-                Products = _productService.GetProductsByCategory(category, page, pageSize)
+                Products = _productService.GetProductsByCategoryByPage(category, page, pageSize)
             };
 
             return View(productListModel);
@@ -74,7 +75,7 @@ namespace ShopApp.WebUI.Controllers
             // in this case, product found and valid
             // return ProductDetailModel which includes categories
 
-            return View(new ProductDetailsModel
+            return View(new ProductDetailsViewModel
             {
                 Product = theProduct,
                 Categories = theProduct.ProductCategories.Select(prop => prop.Category).ToList()

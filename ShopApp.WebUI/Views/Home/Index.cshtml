@@ -1,4 +1,4 @@
-﻿@model ProductListModel
+﻿@model ProductListViewModel
 
 @{
     ViewData["Title"] = "Magic Shopping";
@@ -27,6 +27,8 @@
                     <partial name="_product" model="@product" />
                 }
             </div>
+
+            <div page-model="@Model.PaginationInformation"></div>
         </div>
     </div>
 </div>

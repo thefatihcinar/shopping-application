@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ShopApp.Business.Abstract;
-using ShopApp.WebUI.Models;
+using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

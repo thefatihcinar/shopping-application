@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using ShopApp.Business.Abstract;
-using ShopApp.WebUI.Models;
+using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -18,6 +18,8 @@ namespace ShopApp.WebUI.Controllers
 
         private ICategoryService _categoryService;
 
+        private const int pageSize = 6; // number of products per page
+
         public HomeController(ILogger<HomeController> logger, IProductService productService, ICategoryService categoryService)
         {
             _logger = logger;
@@ -29,25 +31,25 @@ namespace ShopApp.WebUI.Controllers
             // here again dependency injection
         }
 
-        public IActionResult Index()
+        [Route("/")]
+        public IActionResult Index(int page = 1)
         {
+
             /* bring Products and Categories into Front-end */
-            var theProductListModel = new ProductListModel()
+            var theProductListModel = new ProductListViewModel()
             {
-                Products = _productService.GetAll()
+                PaginationInformation = new PageInfo
+                {
+                    TotalItems = _productService.GetAll().Count(),
+                    ItemsPerPage = pageSize,
+                    CurrentPage = page,
+                    CurrentCategory = null
+                },
+                Products = _productService.GetProductsByCategoryByPage(category: null ,page, pageSize)
             };
             return View(theProductListModel);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
+      
     }
 }

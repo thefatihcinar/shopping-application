@@ -1,3 +1,4 @@
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,7 +8,9 @@ using ShopApp.Business.Abstract;
 using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
 using ShopApp.DataAccess.Concrete.EfCore;
+using ShopApp.Entities;
 using ShopApp.WebUI.Middlewares;
+using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +31,8 @@ namespace ShopApp.WebUI
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddAutoMapper(typeof(Startup)); /* Use AutoMapper */
 
             services.AddScoped<IProductRepository, EfCoreProductRepository>();
             // dependency injection: use MemoryProductRepository whenever I call IProductRepository
@@ -71,15 +76,30 @@ namespace ShopApp.WebUI
             {
 
                 endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                /*
+                endpoints.MapControllerRoute(
                     name: "products",
                     pattern: "{products}/{category?}",
                     defaults: new { controller = "shop", action = "list" }
                     );
 
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                        name: "adminProducts",
+                        pattern: "admin/products",
+                        defaults: new { controller = "admin", action = "index"}
+                    );
+                endpoints.MapControllerRoute(
+                        name: "adminProducts",
+                        pattern: "admin/products/{id?}",
+                        defaults: new { controller = "admin", action = "editproduct"}
+
+                    );
+                */
+               
             });
+
         }
     }
 }

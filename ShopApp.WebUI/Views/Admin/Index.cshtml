@@ -1,0 +1,78 @@
+﻿
+@model ProductListViewModel
+
+@{
+    ViewData["Title"] = "Admin Products";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Admin Products</h1>
+<hr />
+
+@if (ViewBag.DeleteMessage != null)
+{
+    <div class="alert alert-warning" role="alert">
+        @ViewBag.DeleteMessage
+    </div>
+}
+
+@if (ViewBag.CreationMessage != null)
+{
+    <div class="alert alert-success" role="alert">
+        @ViewBag.CreationMessage
+    </div>
+}
+
+@if (ViewBag.UpdateMessage != null)
+{
+    <div class="alert alert-primary" role="alert">
+        @ViewBag.UpdateMessage
+    </div>
+}
+
+@if (Model.Products.Count() > 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <td><strong>ID</strong></td>
+                <td><strong>Image</strong></td>
+                <td><strong>Name</strong></td>
+                <td><strong>Price</strong></td>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Products)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>
+                        <img src="~/img/@item.ImageURL" width="80" />
+                    </td>
+                    <td><strong>@item.Name</strong></td>
+                    <td>@item.Price</td>
+                    <td>
+                        <a class="btn btn-primary btn-sm mr-2" href="/admin/products/@item.Id">Edit</a>
+                        <form asp-controller="admin" asp-action="deleteproduct" method="post" style="display: inline;">
+                            <input type="hidden" name="Id" value="@item.Id" />
+                            <button type="submit" class="btn btn-danger btn-sm" value="">Delete</button>
+                        </form>
+
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+}
+else
+{
+    <div class="alert alert-danger" role="alert">
+        <h5>No Products in the Database</h5>
+    </div>
+}
+
+<div page-model="@Model.PaginationInformation"></div>
+
+
+
