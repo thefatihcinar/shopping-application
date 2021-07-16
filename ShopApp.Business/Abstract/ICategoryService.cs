@@ -21,6 +21,12 @@ namespace ShopApp.Business.Abstract
 
         Category GetById(int id);
 
+        Category GetByIdIncludingProducts(int id);
+        /* this service returns the desired category with
+         * products object in it / included by it 
+         * since EF Core do not load many to many relation by default */
+
+
         void Create(Category entity);
 
         void Update(Category entity);

@@ -10,5 +10,6 @@ namespace ShopApp.DataAccess.Abstract
     public interface ICategoryRepository: IRepository<Category>
     {
         List<Category> GetCategoriesByPage(int page, int pageSize);
+        Category GetByIdIncludingProducts(int id);
     }
 }

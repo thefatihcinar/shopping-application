@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace ShopApp.DataAccess.Concrete.EfCore
 {
@@ -22,6 +23,20 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
             }
 
+        }
+        
+        public Category GetByIdIncludingProducts(int id)
+        {
+            using(var context = new ShopContext())
+            {
+                return context.Categories.Where(obj => obj.Id == id)
+                    .Include(obj => obj.ProductCategories)
+                    .ThenInclude(obj => obj.Product)
+                    .FirstOrDefault();
+                /* get all of the products of a category */
+            }
+
+          
         }
     }
 }

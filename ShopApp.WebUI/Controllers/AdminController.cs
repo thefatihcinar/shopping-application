@@ -225,7 +225,7 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpGet]
         [Route("categories/{id?}")]
-        public IActionResult EditCategory(int? id)
+        public IActionResult EditCategory(int? id, int page = 1)
         {
             /* render edit page with a given category id */
 
@@ -237,7 +237,7 @@ namespace ShopApp.WebUI.Controllers
                 return NotFound();
             }
 
-            var category = _categoryService.GetById((int) id);
+            var category = _categoryService.GetByIdIncludingProducts((int) id);
 
             // the category still might be nul
             if(category == null)
@@ -245,8 +245,23 @@ namespace ShopApp.WebUI.Controllers
                 return NotFound();
             }
 
+            const int pageSize = 2;
+
             // Create a View Model from Category
             var categoryViewModel = _mapper.Map<CategoryViewModel>(category);
+            // also include products of a category manually with paginating
+            categoryViewModel.Products = category.ProductCategories.Select(obj => obj.Product)
+                                                 .Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            // Send pagination information to the UI
+            categoryViewModel.PaginationInformation = new PageInfo
+            {
+                TotalItems = categoryViewModel.Products.Count(),
+                ItemsPerPage = pageSize,
+                CurrentPage = page,
+                CurrentCategory = null, // must be null, because of pagination
+                BaseLink = $"/admin/categories/{id}"
+            };
+            
 
             return View(categoryViewModel);
         }
