@@ -68,6 +68,9 @@ namespace ShopApp.WebUI.Controllers
         {
             /* render add new product form to the screen */
 
+            /* also render all categories to the screen for the admin to choose */
+            ViewBag.AllCategories = _categoryService.GetAll();
+
             return View();
         }
 
