@@ -32,6 +32,18 @@
         </form>
     </div>
     <div class="col-md-8">
+        @if(@ViewBag.UncategorizationSuccessMessage != null)
+        {
+            <div class="alert alert-info" role="alert">
+                @ViewBag.UncategorizationSuccessMessage
+            </div>
+        }
+        @if(@ViewBag.UncategorizationFailedMessage != null)
+        {
+            <div class="alert alert-danger" role="alert">
+                @ViewBag.UncategorizationFailedMessage
+            </div>
+        }
         @if (Model.Products.Count() > 0)
         {
             <table class="table table-bordered">
@@ -55,6 +67,11 @@
                             <td>@item.Price</td>
                             <td>
                                 <a class="btn btn-primary btn-sm mr-2" href="/admin/products/@item.Id">Edit</a>
+                                <form asp-controller="admin" asp-action="uncategorize" method="post" style="display: inline;" class="mr-2">
+                                    <input type="hidden" name="productId" value="@item.Id" />
+                                    <input type="hidden" name="categoryId" value="@Model.Id" />
+                                    <button type="submit" class="btn btn-warning btn-sm" value="">Uncategorize</button>
+                                </form>
                                 <form asp-controller="admin" asp-action="deleteproduct" method="post" style="display: inline;">
                                     <input type="hidden" name="Id" value="@item.Id" />
                                     <button type="submit" class="btn btn-danger btn-sm" value="">Delete</button>
@@ -73,8 +90,8 @@
                 <h5>No Products in the Database</h5>
             </div>
             <br />
-            <a class="btn btn-success" href ="/admin/products/add">New Product</a>
-            
+            <a class="btn btn-success" href="/admin/products/add">New Product</a>
+
         }
 
         <div page-model="@Model.PaginationInformation"></div>

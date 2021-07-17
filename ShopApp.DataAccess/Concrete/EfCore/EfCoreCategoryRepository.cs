@@ -38,5 +38,27 @@ namespace ShopApp.DataAccess.Concrete.EfCore
 
           
         }
+
+        public bool Uncategorize(int categoryId, int productId)
+        {
+            if(categoryId <= 0 || productId <= 0)
+            {
+                // it cannot be correct
+                return false;
+            }
+            
+            // Get to the Junction table, ProductCateogries
+            // Remove one line from it
+
+            using(var context = new ShopContext())
+            {
+                string sqlCommand = @"delete from ProductCategory where CategoryId = @p0 and ProductId = @p1";
+
+                context.Database.ExecuteSqlRaw(sqlCommand, categoryId, productId);
+                /* remove the line, i.e. connections between product and categories */
+
+                return true;
+            }
+        }
     }
 }

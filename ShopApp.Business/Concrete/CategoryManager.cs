@@ -16,47 +16,53 @@ namespace ShopApp.Business.Concrete
         */
 
         // business layer is connected to the repository
-        private ICategoryRepository __categoryRepository; // reference to the category repository
+        private ICategoryRepository _categoryRepository; // reference to the category repository
 
         public CategoryManager(ICategoryRepository categoryRepository)
         {
-            __categoryRepository = categoryRepository; // dependency
+            _categoryRepository = categoryRepository; // dependency
             // by injecting the concrete repository
         }
 
         public void Create(Category entity)
         {
-            __categoryRepository.Create(entity);
+            _categoryRepository.Create(entity);
         }
 
         public void Delete(Category entity)
         {
-            __categoryRepository.Delete(entity);
+            _categoryRepository.Delete(entity);
         }
 
         public List<Category> GetAll()
         {
-            return __categoryRepository.GetAll().ToList();
+            return _categoryRepository.GetAll().ToList();
         }
 
         public List<Category> GetCategoriesByPage(int page, int pageSize)
         {
-            return __categoryRepository.GetCategoriesByPage(page, pageSize);
+            return _categoryRepository.GetCategoriesByPage(page, pageSize);
         }
 
         public Category GetById(int id)
         {
-            return __categoryRepository.GetById(id);
+            return _categoryRepository.GetById(id);
         }
 
         public Category GetByIdIncludingProducts(int id)
         {
-            return __categoryRepository.GetByIdIncludingProducts(id);
+            return _categoryRepository.GetByIdIncludingProducts(id);
         }
 
         public void Update(Category entity)
         {
-            __categoryRepository.Update(entity);
+            _categoryRepository.Update(entity);
+        }
+
+        public bool Uncategorize(int categoryId, int productId)
+        {
+            return _categoryRepository.Uncategorize(categoryId, productId);
+
         }
     }
 }

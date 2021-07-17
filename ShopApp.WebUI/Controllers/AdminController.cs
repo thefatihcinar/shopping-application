@@ -229,10 +229,18 @@ namespace ShopApp.WebUI.Controllers
         {
             /* render edit page with a given category id */
 
+            // if we have been redirected from uncategorization
+            if (TempData["UncategorizationSuccessMessage"] != null)
+                ViewBag.UncategorizationSuccessMessage = TempData["UncategorizationSuccessMessage"].ToString();
+            if (TempData["UncategorizationFailedMessage"] != null)
+                ViewBag.UncategorizationFailedMessage = TempData["UncategorizationFailedMessage"].ToString();
+
+
+
             // Go get the category with the given id
             // in order to render to the screen 
 
-            if(id == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -255,7 +263,7 @@ namespace ShopApp.WebUI.Controllers
             // Send pagination information to the UI
             categoryViewModel.PaginationInformation = new PageInfo
             {
-                TotalItems = categoryViewModel.Products.Count(),
+                TotalItems = category.ProductCategories.Count(),
                 ItemsPerPage = pageSize,
                 CurrentPage = page,
                 CurrentCategory = null, // must be null, because of pagination
@@ -271,7 +279,7 @@ namespace ShopApp.WebUI.Controllers
         public IActionResult EditCategory(CategoryViewModel model)
         {
             /* update this category */
-
+            
             // Go find the category with a given id
             var old = _categoryService.GetById(model.Id);
 
@@ -313,6 +321,21 @@ namespace ShopApp.WebUI.Controllers
             TempData["DeleteMessage"] = "The category has been successfully deleted.";
 
             return RedirectToAction("categories");
+        }
+
+        [HttpPost]
+        [Route("uncategorize")]
+        public IActionResult Uncategorize(int categoryId, int productId)
+        {
+            /* this controller will uncategorize a product */
+            var uncategorizeResult = _categoryService.Uncategorize(categoryId, productId);
+            if (uncategorizeResult)
+                TempData["UncategorizationSuccessMessage"] = "The product has been successfully uncategorized.";
+            else
+                TempData["UncategorizationFailedMessage"] = "Uncategorization has failed.";
+
+            // Redirect to the edit category page with a message
+            return Redirect($"/admin/categories/{categoryId}");
         }
     }
 }

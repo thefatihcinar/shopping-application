@@ -26,6 +26,8 @@ namespace ShopApp.Business.Abstract
          * products object in it / included by it 
          * since EF Core do not load many to many relation by default */
 
+        bool Uncategorize(int categoryId, int productId);
+        /* this service uncategorizes a product */
 
         void Create(Category entity);
 

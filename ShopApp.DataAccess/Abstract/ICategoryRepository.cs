@@ -11,5 +11,8 @@ namespace ShopApp.DataAccess.Abstract
     {
         List<Category> GetCategoriesByPage(int page, int pageSize);
         Category GetByIdIncludingProducts(int id);
+
+        bool Uncategorize(int categoryId, int productId);
+        /* this method will uncategorize a product */
     }
 }
