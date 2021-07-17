@@ -72,11 +72,6 @@
                                     <input type="hidden" name="categoryId" value="@Model.Id" />
                                     <button type="submit" class="btn btn-warning btn-sm" value="">Uncategorize</button>
                                 </form>
-                                <form asp-controller="admin" asp-action="deleteproduct" method="post" style="display: inline;">
-                                    <input type="hidden" name="Id" value="@item.Id" />
-                                    <button type="submit" class="btn btn-danger btn-sm" value="">Delete</button>
-                                </form>
-
                             </td>
                         </tr>
                     }
@@ -87,7 +82,7 @@
         else
         {
             <div class="alert alert-danger" role="alert">
-                <h5>No Products in the Database</h5>
+                No Products in the Database
             </div>
             <br />
             <a class="btn btn-success" href="/admin/products/add">New Product</a>
