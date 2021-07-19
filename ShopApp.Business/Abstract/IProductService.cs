@@ -22,6 +22,14 @@ namespace ShopApp.Business.Abstract
 
         List<Product> GetProductsByCategoryByPage(string? category, int page, int pageSize);
 
+        Product GetProductByIdIncludingCategories(int id);
+        /* this service provides a product object including 
+         * its categories loaded
+         */
+
+        List<Category> GetCategoriesofProduct(int id);
+        /* this servise provides categories of a product */
+
         void Create(Product entity);
 
         void Update(Product entity);

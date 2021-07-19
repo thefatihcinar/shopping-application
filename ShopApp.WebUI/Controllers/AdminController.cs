@@ -107,9 +107,15 @@ namespace ShopApp.WebUI.Controllers
                 return NotFound();
             }
 
-            // create view model for product from product
+            // create viewmodel for product from product
             var productViewModel = _mapper.Map<ProductViewModel>(product);
-            
+            productViewModel.SelectedCategories = _productService.GetCategoriesofProduct((int) id); 
+            // also get the product's categories
+
+
+            /* also render all categories to the screen for the admin to choose */
+            ViewBag.AllCategories = _categoryService.GetAll();
+
             // render this product to the screen for editing
             return View(productViewModel);
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ShopApp.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,5 +17,7 @@ namespace ShopApp.WebUI.ViewModels
         public string Description { get; set; }
         public string ImageURL { get; set; }
         public decimal Price { get; set; }
+
+        public List<Category> SelectedCategories { get; set; }
     }
 }

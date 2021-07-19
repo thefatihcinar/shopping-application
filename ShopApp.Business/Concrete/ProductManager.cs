@@ -16,11 +16,11 @@ namespace ShopApp.Business.Concrete
         */
 
         // business layer is connected to the repository
-        private IProductRepository __productRepository; // referans to the product repository interface
+        private IProductRepository _productRepository; // referans to the product repository interface
 
         public ProductManager(IProductRepository productRepository)
         {
-            __productRepository = productRepository;
+            _productRepository = productRepository;
             // by injecting the concrete repository,
             // set the repository
         }
@@ -28,42 +28,55 @@ namespace ShopApp.Business.Concrete
         public int CountByCategory(string category)
         {
             /* this method will return total number of products in a category */
-            return __productRepository.CountByCategory(category);
+            return _productRepository.CountByCategory(category);
         }
 
         public void Create(Product entity)
         {
-            __productRepository.Create(entity);
+            _productRepository.Create(entity);
         }
 
         public void Delete(Product entity)
         {
-            __productRepository.Delete(entity);
+            _productRepository.Delete(entity);
         }
 
         public List<Product> GetAll()
         {
-            return __productRepository.GetAll().ToList();
+            return _productRepository.GetAll().ToList();
         }
 
         public Product GetById(int id)
         {
-            return __productRepository.GetById(id);
+            return _productRepository.GetById(id);
         }
 
         public Product GetProductDetails(int id)
         {
-            return __productRepository.GetProductDetails(id);
+            return _productRepository.GetProductDetails(id);
         }
 
         public List<Product> GetProductsByCategoryByPage(string? category, int page, int pageSize)
         {
-            return __productRepository.GetProductsByCategoryByPage(category, page, pageSize);
+            return _productRepository.GetProductsByCategoryByPage(category, page, pageSize);
+        }
+
+        public Product GetProductByIdIncludingCategories(int id)
+        {
+            return _productRepository.GetProductByIdIncludingCategories(id);
         }
 
         public void Update(Product entity)
         {
-            __productRepository.Update(entity);
+            _productRepository.Update(entity);
+        }
+
+        public List<Category> GetCategoriesofProduct(int id)
+        {
+            var product = this.GetProductByIdIncludingCategories(id); // go get the product
+
+            // select categories of a product and return them all
+            return product.ProductCategories.Select(obj => obj.Category).ToList();
         }
     }
 }

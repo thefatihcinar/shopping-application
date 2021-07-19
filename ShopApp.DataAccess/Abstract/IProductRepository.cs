@@ -23,5 +23,8 @@ namespace ShopApp.DataAccess.Abstract
         int CountByCategory(string category);
 
         /* this method will calculate number of items in a category */
+
+        Product GetProductByIdIncludingCategories(int id);
+        /* this method will return a product with its categories loaded in it */
     }
 }

@@ -17,17 +17,17 @@
 <h1>Edit Product</h1>
 <hr />
 
-<div class="row">
-    <div class="col-md-8">
-        <form asp-controller="Admin" asp-action="EditProduct" type="submit">
+<form asp-controller="Admin" asp-action="EditProduct" type="submit">
+    <div class="row">
+        <div class="col-9 product-information">
             <!--Product ID-->
-            <input type="hidden" value="@Model.Id" name="Id"/>
+            <input type="hidden" value="@Model.Id" name="Id" />
 
             <!--Product Name-->
             <div class="form-group row">
                 <label asp-for="Name" class="col-md-3 col-form-label adminLabel">Product Name</label>
                 <div class="col-md-9">
-                    <input asp-for="Name" class="form-control" name="Name" value= "@Model.Name" />
+                    <input asp-for="Name" class="form-control" name="Name" value="@Model.Name" />
                 </div>
             </div>
 
@@ -62,7 +62,23 @@
                     <button type="submit" value="Save" class="btn btn-primary">Save</button>
                 </div>
             </div>
-
-        </form>
+        </div>
+        <div class="col-3 category-information">
+            @if (ViewBag.AllCategories != null)
+            {
+                @foreach (var category in ViewBag.AllCategories)
+                {
+                    <div class="custom-control custom-checkbox">
+                        <input type="checkbox"
+                               class="custom-control-input"
+                               id="category@(category.Id)"
+                               @(Model.SelectedCategories
+                                .Any(seletectedCat => seletectedCat.Id == category.Id)?"checked":"")/>
+                        <label class="custom-control-label"
+                               for="category@(category.Id)">@category.Name</label>
+                        </div>
+                    }
+            }
+        </div>
     </div>
-</div>
+</form>

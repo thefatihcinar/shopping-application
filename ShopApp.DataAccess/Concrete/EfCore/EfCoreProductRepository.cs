@@ -37,6 +37,20 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             }
         }
 
+        public Product GetProductByIdIncludingCategories(int id)
+        {
+            /* this method will return the product desired by a given id
+             * but it will include, load its categories */
+            using(var context = new ShopContext())
+            {
+                return context.Products
+                              .Where(product => product.Id == id)
+                              .Include(obj => obj.ProductCategories)
+                              .ThenInclude(obj => obj.Category)
+                              .FirstOrDefault();
+            }
+        }
+
         public Product GetProductDetails(int id)
         {
             /* this method will return details of a product
