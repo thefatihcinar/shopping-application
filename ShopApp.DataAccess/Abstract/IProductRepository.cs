@@ -26,5 +26,8 @@ namespace ShopApp.DataAccess.Abstract
 
         Product GetProductByIdIncludingCategories(int id);
         /* this method will return a product with its categories loaded in it */
+
+        bool Update(Product updatedProduct, int[] categoryIds);
+        /* this method will update a product including its categories */
     }
 }

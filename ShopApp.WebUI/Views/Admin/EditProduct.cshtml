@@ -71,6 +71,8 @@
                     <div class="custom-control custom-checkbox">
                         <input type="checkbox"
                                class="custom-control-input"
+                               name="categoryId"
+                               value="@category.Id"
                                id="category@(category.Id)"
                                @(Model.SelectedCategories
                                 .Any(seletectedCat => seletectedCat.Id == category.Id)?"checked":"")/>

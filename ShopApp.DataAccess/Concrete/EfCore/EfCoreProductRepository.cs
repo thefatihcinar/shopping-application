@@ -100,5 +100,32 @@ namespace ShopApp.DataAccess.Concrete.EfCore
                 return products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
             }
         }
+
+        public bool Update(Product updatedProduct, int[] categoryIds)
+        {
+            using(var context = new ShopContext())
+            {
+                context.Entry(updatedProduct).State = EntityState.Modified;
+                // update static parts
+
+                // update its categories
+                // first get the product
+                var product = context.Products.Where(product => product.Id == updatedProduct.Id)
+                                .Include(obj => obj.ProductCategories)
+                                .FirstOrDefault();
+
+                product.ProductCategories = categoryIds
+                                .Select(singleCategoryId => new ProductCategory
+                                {
+                                    CategoryId = singleCategoryId,
+                                    ProductId = product.Id
+                                }).ToList();
+
+
+                context.SaveChanges();
+
+                return true;
+            }
+        }
     }
 }

@@ -122,7 +122,7 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpPost]
         [Route("/admin/products/{id}")]
-        public IActionResult EditProduct(ProductViewModel model)
+        public IActionResult EditProduct(ProductViewModel model, int[] categoryId)
         {
             // Go get the product with this given id
             // we have made the id attribute hidden in the form
@@ -138,7 +138,7 @@ namespace ShopApp.WebUI.Controllers
             // First convert the view model to an actual model
             theProduct = _mapper.Map<Product>(model);
 
-            _productService.Update(theProduct);
+            _productService.Update(theProduct, categoryId);
 
             // bring it to UI
             TempData["UpdateMessage"] = "The product has been successfully updated. You can check it out.";

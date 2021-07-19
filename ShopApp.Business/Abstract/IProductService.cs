@@ -39,5 +39,8 @@ namespace ShopApp.Business.Abstract
         int CountByCategory(string category);
 
         /* this method will return total number of products that belong to a category */
+
+        bool Update(Product entity, int[] categoryIds);
+        /* this method will provide functionality that updates a product and its categories */
     }
 }

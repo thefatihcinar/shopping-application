@@ -78,5 +78,10 @@ namespace ShopApp.Business.Concrete
             // select categories of a product and return them all
             return product.ProductCategories.Select(obj => obj.Category).ToList();
         }
+
+        public bool Update(Product entity, int[] categoryIds)
+        {
+            return _productRepository.Update(entity, categoryIds);
+        }
     }
 }
