@@ -76,12 +76,12 @@ namespace ShopApp.WebUI.Controllers
 
         [HttpPost]
         [Route("products/add")]
-        public IActionResult AddProduct(ProductViewModel model)
+        public IActionResult AddProduct(ProductViewModel model, int[] categoryId)
         {
             /* add new product */
             Product product = _mapper.Map<Product>(model);
 
-            _productService.Create(product);
+            _productService.Create(product, categoryId);
 
             TempData["CreationMessage"] = "The product is created successfully.";
 

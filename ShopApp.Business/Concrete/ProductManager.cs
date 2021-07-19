@@ -83,5 +83,10 @@ namespace ShopApp.Business.Concrete
         {
             return _productRepository.Update(entity, categoryIds);
         }
+
+        public bool Create(Product entity, int[] categoryIds)
+        {
+            return _productRepository.Create(entity, categoryIds);
+        }
     }
 }

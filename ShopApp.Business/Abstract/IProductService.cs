@@ -32,6 +32,9 @@ namespace ShopApp.Business.Abstract
 
         void Create(Product entity);
 
+        bool Create(Product entity, int[] categoryIds);
+        /* this will create a product with its categories given */
+
         void Update(Product entity);
 
         void Delete(Product entity);

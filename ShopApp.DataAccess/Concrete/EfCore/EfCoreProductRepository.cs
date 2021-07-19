@@ -37,6 +37,32 @@ namespace ShopApp.DataAccess.Concrete.EfCore
             }
         }
 
+        public bool Create(Product entity, int[] categoryIds)
+        {
+            using(var context = new ShopContext())
+            {
+                // add this new product to the database
+                context.Set<Product>().Add(entity);
+                context.SaveChanges();
+
+                // Get its ID and start adding its categories
+
+                entity.ProductCategories = categoryIds
+                    .Select(selectedCategoryID => new ProductCategory
+                    {
+                        CategoryId = selectedCategoryID,
+                        ProductId = entity.Id
+                    })
+                    .ToList();
+
+                context.SaveChanges();
+
+
+
+                return true;
+            }
+        }
+
         public Product GetProductByIdIncludingCategories(int id)
         {
             /* this method will return the product desired by a given id
