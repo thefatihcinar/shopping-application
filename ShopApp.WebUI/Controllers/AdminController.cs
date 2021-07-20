@@ -262,7 +262,7 @@ namespace ShopApp.WebUI.Controllers
                 return NotFound();
             }
 
-            const int pageSize = 2;
+            const int pageSize = 8;
 
             // Create a View Model from Category
             var categoryViewModel = _mapper.Map<CategoryViewModel>(category);
