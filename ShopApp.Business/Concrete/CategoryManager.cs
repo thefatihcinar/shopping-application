@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Business.Concrete
 {
-    public class CategoryManager : ICategoryService
+    public class CategoryManager : ICategoryService, IValidator<Category>
     {
         /*
          * these are the real, concrete services, category manager delievers
@@ -17,6 +17,8 @@ namespace ShopApp.Business.Concrete
 
         // business layer is connected to the repository
         private ICategoryRepository _categoryRepository; // reference to the category repository
+
+        public Dictionary<string, string> Error { get; set; }
 
         public CategoryManager(ICategoryRepository categoryRepository)
         {
@@ -63,6 +65,35 @@ namespace ShopApp.Business.Concrete
         {
             return _categoryRepository.Uncategorize(categoryId, productId);
 
+        }
+
+        public bool Validate(Category entity)
+        {
+            // assume that the given entity is valid
+            bool isValid = true;
+
+            // now try to prove wtether it is valid or not
+
+            // Criteria 1. Category Name
+            if (String.IsNullOrEmpty(entity.Name))
+            {
+                Error["NameError"] = "Category name cannot be empty.";
+
+                isValid = false; // now it is not valid any more
+                return isValid;
+            }
+
+            // Criteria 2. Category Name must be at least 2 characters long
+            if(entity.Name.Length < 2)
+            {
+                Error["NameError"] = "Category name must be at least 2 characters long.";
+
+                isValid = false; // now it is not valid any more
+                return isValid;
+            }
+
+            /* return the final result, it all the criteria have been met */
+            return isValid;
         }
     }
 }
