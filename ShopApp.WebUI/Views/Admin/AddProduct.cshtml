@@ -17,6 +17,7 @@
 
 <hr />
 <form asp-controller="Admin" asp-action="AddProduct" type="submit">
+    <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-9 product-information">
             <!--Product Name-->
@@ -24,6 +25,7 @@
                 <label asp-for="Name" class="col-md-3 col-form-label adminLabel">Product Name</label>
                 <div class="col-md-9">
                     <input asp-for="Name" class="form-control" name="Name" value="@Model.Name" />
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
 
@@ -32,6 +34,7 @@
                 <label asp-for="ImageURL" class="col-md-3 col-form-label adminLabel">Image</label>
                 <div class="col-md-9">
                     <input asp-for="ImageURL" type="text" class="form-control" name="ImageURL" value="@Model.ImageURL" />
+                    <span asp-validation-for="ImageURL" class="text-danger"></span>
                 </div>
             </div>
 
@@ -44,6 +47,7 @@
                               name="Description"
                               value="@Model.Description"
                               ></textarea>
+                    <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
 
@@ -52,6 +56,7 @@
                 <label asp-for="Price" class="col-md-3 col-form-label adminLabel">Price</label>
                 <div class="col-md-9">
                     <input asp-for="Price" type="text" class="form-control" name="Price" value="@Model.Price" />
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
             </div>
 
