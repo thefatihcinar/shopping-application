@@ -23,6 +23,14 @@
     <div asp-validation-summary="All" class="text-danger"></div>
     <div class="row">
         <div class="col-9 product-information">
+            <!--Render error message if it comes from business layer-->
+            @if (ViewBag.ErrorMessage != null)
+            {
+                <div class="text-danger">
+                    @ViewBag.ErrorMessage
+                </div>
+            }
+
             <!--Product Name-->
             <div class="form-group row">
                 <label asp-for="Name" class="col-md-3 col-form-label adminLabel">Product Name</label>
