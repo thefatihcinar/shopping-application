@@ -6,6 +6,9 @@
 
 @section Scripts{
 
+    <script src="~/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
     <script src="~/modules/ckeditor/ckeditor.js"></script>
     <script src="~/modules/ckeditor/ckeditor.js"></script>
     <script>
@@ -42,11 +45,10 @@
             <div class="form-group row">
                 <label asp-for="Description" class="col-md-3 col-form-label adminLabel">Description</label>
                 <div class="col-md-9">
-                    <textarea asp-for="Description" id="editor" 
+                    <textarea asp-for="Description" id="editor"
                               class="form-control "
                               name="Description"
-                              value="@Model.Description"
-                              ></textarea>
+                              value="@Model.Description"></textarea>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
             </div>
