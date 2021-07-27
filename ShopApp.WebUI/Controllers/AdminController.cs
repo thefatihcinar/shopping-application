@@ -71,7 +71,8 @@ namespace ShopApp.WebUI.Controllers
             /* also render all categories to the screen for the admin to choose */
             ViewBag.AllCategories = _categoryService.GetAll();
 
-            return View();
+            var emptyViewModel = new ProductViewModel();
+            return View(emptyViewModel);
         }
 
         [HttpPost]
@@ -79,14 +80,21 @@ namespace ShopApp.WebUI.Controllers
         public IActionResult AddProduct(ProductViewModel model, int[] categoryId)
         {
             /* add new product */
-            Product product = _mapper.Map<Product>(model);
 
-            _productService.Create(product, categoryId);
+            if (ModelState.IsValid){
+                // if the model is validated
+                Product product = _mapper.Map<Product>(model);
 
-            TempData["CreationMessage"] = "The product is created successfully.";
+                _productService.Create(product, categoryId);
 
-            return RedirectToAction("Index");
+                TempData["CreationMessage"] = "The product is created successfully.";
 
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return View(model);
+            }
         }
 
         [HttpGet]
@@ -213,23 +221,38 @@ namespace ShopApp.WebUI.Controllers
         {
             /* renders new category page */
 
-            return View();
+            var emptyViewModel = new CategoryViewModel();
+            return View(emptyViewModel);
         }
 
         [HttpPost]
         [Route("categories/add")]
         public IActionResult AddCategory(CategoryViewModel model)
         {
-            // Convert View Model into an actual category to add
-            var newCategory = _mapper.Map<Category>(model);
+            if (ModelState.IsValid){
+                // if the model is validated
 
-            // Add it to the database
-            _categoryService.Create(newCategory);
+                // Convert View Model into an actual category to add
+                var newCategory = _mapper.Map<Category>(model);
 
-            // Send message to the UI, indicating that the category has been added properly
-            TempData["CreationMessage"] = "New Category is successfully created.";
+                // Add it to the database
+                _categoryService.Create(newCategory);
 
-            return RedirectToAction("categories");
+                // Send message to the UI, indicating that the category has been added properly
+                TempData["CreationMessage"] = "New Category is successfully created.";
+
+                return RedirectToAction("categories");
+            }
+            else
+            {
+                // Send back the given model
+                return View(model);
+            }
+           
+
+            
+
+            
         }
 
         [HttpGet]
