@@ -5,8 +5,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@section Scripts{ 
-    
+@section Scripts{
+
+    <script src="~/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
     <script src="~/modules/ckeditor/ckeditor.js"></script>
     <script src="~/modules/ckeditor/ckeditor.js"></script>
     <script>
@@ -19,6 +22,14 @@
 
 <form asp-controller="Admin" asp-action="EditProduct" type="submit">
     <div class="row">
+        <!--Render error message if it comes from business layer-->
+        @if (ViewBag.ErrorMessage != null)
+        {
+            <div class="text-danger">
+                @ViewBag.ErrorMessage
+            </div>
+        }
+
         <div class="col-9 product-information">
             <!--Product ID-->
             <input type="hidden" value="@Model.Id" name="Id" />
@@ -28,6 +39,7 @@
                 <label asp-for="Name" class="col-md-3 col-form-label adminLabel">Product Name</label>
                 <div class="col-md-9">
                     <input asp-for="Name" class="form-control" name="Name" value="@Model.Name" />
+                    <span class="text-danger" asp-validation-for="Name"></span>
                 </div>
             </div>
 
@@ -36,6 +48,7 @@
                 <label asp-for="ImageURL" class="col-md-3 col-form-label adminLabel">Image</label>
                 <div class="col-md-9">
                     <input asp-for="ImageURL" type="text" class="form-control" name="ImageURL" value="@Model.ImageURL" />
+                    <span class="text-danger" asp-validation-for="ImageURL"></span>
                 </div>
             </div>
 
@@ -45,6 +58,7 @@
                 <div class="col-md-9">
                     <textarea asp-for="Description" id="editor" class="form-control " name="Description"
                               value="@Model.Description"></textarea>
+                    <span class="text-danger" asp-validation-for="Description"></span>
                 </div>
             </div>
 
@@ -53,6 +67,7 @@
                 <label asp-for="Price" class="col-md-3 col-form-label adminLabel">Price</label>
                 <div class="col-md-9">
                     <input asp-for="Price" type="text" class="form-control" name="Price" value="@Model.Price" />
+                    <span class="text-danger" asp-validation-for="Price"></span>
                 </div>
             </div>
 
@@ -74,8 +89,7 @@
                                name="categoryId"
                                value="@category.Id"
                                id="category@(category.Id)"
-                               @(Model.SelectedCategories
-                                .Any(seletectedCat => seletectedCat.Id == category.Id)?"checked":"")/>
+                               @(Model.SelectedCategories.Any(seletectedCat => seletectedCat.Id == category.Id) ? "checked" : "") />
                         <label class="custom-control-label"
                                for="category@(category.Id)">@category.Name</label>
                         </div>
