@@ -25,6 +25,8 @@ namespace ShopApp.Business.Concrete
             _productRepository = productRepository;
             // by injecting the concrete repository,
             // set the repository
+
+            Error = new Dictionary<string, string>();
         }
 
         public int CountByCategory(string category)
@@ -33,9 +35,22 @@ namespace ShopApp.Business.Concrete
             return _productRepository.CountByCategory(category);
         }
 
-        public void Create(Product entity)
+        public bool Create(Product entity)
         {
-            _productRepository.Create(entity);
+            bool isValid = Validate(entity);
+
+            if (isValid){
+                // if the model is valid
+                // add to the
+                _productRepository.Create(entity);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
+
         }
 
         public void Delete(Product entity)
@@ -68,9 +83,20 @@ namespace ShopApp.Business.Concrete
             return _productRepository.GetProductByIdIncludingCategories(id);
         }
 
-        public void Update(Product entity)
+        public bool Update(Product entity)
         {
-            _productRepository.Update(entity);
+            bool isValid = Validate(entity);
+
+            if (isValid){
+
+                _productRepository.Update(entity);
+                return true;
+            }
+            else{
+
+                return false;
+            }
+            
         }
 
         public List<Category> GetCategoriesofProduct(int id)
@@ -83,12 +109,33 @@ namespace ShopApp.Business.Concrete
 
         public bool Update(Product entity, int[] categoryIds)
         {
-            return _productRepository.Update(entity, categoryIds);
+            bool isValid = Validate(entity);
+
+            if (isValid){
+                // if the model is valid, allow update
+                return _productRepository.Update(entity, categoryIds);
+            }
+            else{
+
+                return false;
+            }
+            
         }
 
         public bool Create(Product entity, int[] categoryIds)
         {
-            return _productRepository.Create(entity, categoryIds);
+            bool isValid = Validate(entity);
+
+            if (isValid){
+                // if the model is valid, allow add
+                return _productRepository.Create(entity, categoryIds);
+            }
+            else{
+
+                return false;
+            }
+
+            
         }
 
         public bool Validate(Product entity)
@@ -101,7 +148,7 @@ namespace ShopApp.Business.Concrete
             // Criteria 1: Product name must exist. Cannot be null or empty
             if (String.IsNullOrEmpty(entity.Name)){
 
-                Error["NameError"] = "Product name must be provided, cannot be null or empty.";
+                Error.Add("NameError", "Product name must be provided, cannot be null or empty.");
 
                 isValid = false;
                 return isValid;
@@ -110,7 +157,8 @@ namespace ShopApp.Business.Concrete
             // Criteria 2: Product name must be at least 2, at most 200 characters long
             if(entity.Name.Length < 2 || entity.Name.Length > 200) {
 
-                Error["NameError"] = "Product name must be at least 2 characters, at most 200 characters long.";
+                Error.Add("NameError", 
+                    "Product name must be at least 2 characters, at most 200 characters long.");
 
                 isValid = false;
                 return isValid;
@@ -120,7 +168,7 @@ namespace ShopApp.Business.Concrete
             // Criteria 3: Description must exist. Cannot be null or empty
             if (String.IsNullOrEmpty(entity.Description))
             {
-                Error["DescriptionError"] = "Product description must be provided. Cannot be empty or null.";
+                Error.Add("DescriptionError", "Product description must be provided. Cannot be empty or null.");
 
                 isValid = false;
                 return isValid;
@@ -130,7 +178,8 @@ namespace ShopApp.Business.Concrete
             if (entity.Description.Length < 10 || entity.Description.Length > 30000)
             {
 
-                Error["DescriptionError"] = "Description must be at least 10, at most 30 000 characters long";
+                Error.Add("DescriptionError", 
+                    "Description must be at least 10, at most 30 000 characters long");
 
                 isValid = false;
                 return isValid;
@@ -140,7 +189,7 @@ namespace ShopApp.Business.Concrete
             // Criteria 5: ImageURL must exist.
             if (String.IsNullOrEmpty(entity.ImageURL))
             {
-                Error["ImageURLError"] = "ImageURL must exist. Cannot be null or empty.";
+                Error.Add("ImageURLError", "ImageURL must exist. Cannot be null or empty.");
 
                 isValid = false;
                 return isValid;
@@ -150,7 +199,7 @@ namespace ShopApp.Business.Concrete
             // Criteria 6: Price must be between 10 cents and 1 million dollars
             if(entity.Price <= (decimal) 0.01 || entity.Price >= 1000000)
             {
-                Error["PriceError"] = "Price must be between 10 cents and 1 million dollars";
+                Error.Add("PriceError", "Price must be between 10 cents and 1 million dollars");
 
                 isValid = false;
                 return isValid;

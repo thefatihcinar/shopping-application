@@ -85,11 +85,26 @@ namespace ShopApp.WebUI.Controllers
                 // if the model is validated
                 Product product = _mapper.Map<Product>(model);
 
-                _productService.Create(product, categoryId);
+                bool result = _productService.Create(product, categoryId);
 
-                TempData["CreationMessage"] = "The product is created successfully.";
+                if(result == true)
+                {
+                    // if the business layer validates the model
 
-                return RedirectToAction("Index");
+                    TempData["CreationMessage"] = "The product is created successfully.";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    // Combine all error messages
+                    foreach(KeyValuePair<string,string> item in _productService.Error){
+                        ViewBag.ErrorMessage += item.Value;
+                    }
+
+                    return View(model);
+                    
+                }
+
             }
             else
             {
@@ -146,12 +161,30 @@ namespace ShopApp.WebUI.Controllers
             // First convert the view model to an actual model
             theProduct = _mapper.Map<Product>(model);
 
-            _productService.Update(theProduct, categoryId);
+            bool result = _productService.Update(theProduct, categoryId);
 
-            // bring it to UI
-            TempData["UpdateMessage"] = "The product has been successfully updated. You can check it out.";
+            if(result == true)
+            {
+                // if the business layer, validates this
+                // bring it to UI
+                TempData["UpdateMessage"] = "The product has been successfully updated. You can check it out.";
 
-            return RedirectToAction("index");
+                return RedirectToAction("index");
+            }
+            else
+            {
+                // bring what was written to the form, back to the UI
+                // combine all the messages
+                foreach(KeyValuePair<string, string> item in _productService.Error)
+                {
+                    ViewBag.ErrorMessage += item.Value;
+                }
+                return View(model);
+            }
+
+            
+
+            
         }
 
         [HttpPost]

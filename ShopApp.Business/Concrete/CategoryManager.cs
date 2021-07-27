@@ -77,7 +77,7 @@ namespace ShopApp.Business.Concrete
             // Criteria 1. Category Name
             if (String.IsNullOrEmpty(entity.Name))
             {
-                Error["NameError"] = "Category name cannot be empty.";
+                Error.Add("NameError", "Category name cannot be empty.");
 
                 isValid = false; // now it is not valid any more
                 return isValid;
@@ -86,7 +86,7 @@ namespace ShopApp.Business.Concrete
             // Criteria 2. Category Name must be at least 2 characters long
             if(entity.Name.Length < 2)
             {
-                Error["NameError"] = "Category name must be at least 2 characters long.";
+                Error.Add("NameError", "Category name must be at least 2 characters long.");
 
                 isValid = false; // now it is not valid any more
                 return isValid;

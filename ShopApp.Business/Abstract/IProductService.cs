@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.Business.Abstract
 {
-    public interface IProductService
+    public interface IProductService: IValidator<Product>
     {
         /*
          * this is the services that product service offers
@@ -30,12 +30,12 @@ namespace ShopApp.Business.Abstract
         List<Category> GetCategoriesofProduct(int id);
         /* this servise provides categories of a product */
 
-        void Create(Product entity);
+        bool Create(Product entity);
 
         bool Create(Product entity, int[] categoryIds);
         /* this will create a product with its categories given */
 
-        void Update(Product entity);
+        bool Update(Product entity);
 
         void Delete(Product entity);
 
