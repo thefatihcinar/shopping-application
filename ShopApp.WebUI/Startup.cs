@@ -1,6 +1,8 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -9,6 +11,7 @@ using ShopApp.Business.Concrete;
 using ShopApp.DataAccess.Abstract;
 using ShopApp.DataAccess.Concrete.EfCore;
 using ShopApp.Entities;
+using ShopApp.WebUI.Identity;
 using ShopApp.WebUI.Middlewares;
 using ShopApp.WebUI.ViewModels;
 using System;
@@ -30,6 +33,21 @@ namespace ShopApp.WebUI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            /* Add Database Context For Identity */
+            services.AddDbContext<ApplicationIdentityDbContext>( 
+                options => options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
+            // this means that I want to use SQL Server
+            // and use this connection string
+            // and use this object for connection
+
+            /* Add Identity Service Itself */
+            services.AddIdentity<User, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationIdentityDbContext>()
+                .AddDefaultTokenProviders();
+            // This means that We want an identity system
+            // that has Users and User Roles
+            // and use default token providers
+
             services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(Startup)); /* Use AutoMapper */
@@ -70,7 +88,7 @@ namespace ShopApp.WebUI
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
             app.UseEndpoints(endpoints =>
             {
