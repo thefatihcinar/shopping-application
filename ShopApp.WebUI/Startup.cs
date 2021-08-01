@@ -1,6 +1,7 @@
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -69,6 +70,21 @@ namespace ShopApp.WebUI
                 options.SignIn.RequireConfirmedEmail = false;
                 options.SignIn.RequireConfirmedPhoneNumber = false;
 
+            });
+
+            services.ConfigureApplicationCookie(options => {
+
+                options.LoginPath = "/account/login";
+                options.LogoutPath = "/account/logout";
+                options.AccessDeniedPath = "/account/accessdenied";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(60); // valid for 60 minutes
+                options.SlidingExpiration = true;
+                /* if the user is using the system, create new cookie with a new expiration date */
+                options.Cookie = new CookieBuilder
+                {
+                    HttpOnly = true,
+                    Name = ".ShopApp.Security.Cookie"
+                };
             });
 
             services.AddControllersWithViews();
