@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using ShopApp.Entities;
+using ShopApp.WebUI.Identity;
 using ShopApp.WebUI.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,9 @@ namespace ShopApp.WebUI
             /* Category <-> CategoryViewModel */
             CreateMap<Category, CategoryViewModel>();
             CreateMap<CategoryViewModel, Category>();
+
+            /* RegisterViewModel -> User */
+            CreateMap<RegisterViewModel, User>(); // RegisterVM -> User
          }
     }
 }

@@ -1,0 +1,57 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Register</h1>
+<hr />
+
+<form asp-controller="account" asp-action="register" method="post">
+    @if (ViewBag.ErrorMessage != null)
+    {
+        <div class="alert alert-warning" role="alert">
+            <strong>@ViewBag.ErrorMessage</strong>
+        </div>
+    }
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <!--FullName-->
+    <div class="form-group row">
+        <label asp-for="FullName" value="@Model.FullName" class="col-md-2 col-form-label"></label>
+        <div class="col-md-10">
+            <input asp-for="FullName" value="@Model.FullName" class="form-control" />
+            <span asp-validation-for="FullName" class="text-danger"></span>
+        </div>
+    </div>
+    <!--Email-->
+    <div class="form-group row">
+        <label asp-for="Email" value="@Model.Email" class="col-md-2 col-form-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Email" value="@Model.Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <!--Password-->
+    <div class="form-group row">
+        <label asp-for="Password" value="@Model.Password" class="col-md-2 col-form-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Password" value="@Model.Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <!--ConfirmPassword-->
+    <div class="form-group row">
+        <label asp-for="ConfirmPassword" value="@Model.ConfirmPassword" class="col-md-2 col-form-label"></label>
+        <div class="col-md-10">
+            <input asp-for="ConfirmPassword" value="@Model.ConfirmPassword" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+    </div>
+    <!--Register Button-->
+    <div class="form-group row">
+        <div class="col-md-10 offset-md-2">
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+</form>
+
