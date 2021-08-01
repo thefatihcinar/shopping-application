@@ -80,5 +80,49 @@ namespace ShopApp.WebUI.Controllers
         {
             return View();
         }
+
+        
+        [HttpGet]
+        public IActionResult Login()
+        {
+            return View(new LoginViewModel());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = await _userManager.FindByEmailAsync(model.Email);
+                // get the user with the email
+
+                // User not found
+                if(user == null)
+                {
+                    ModelState.AddModelError("", "User not found. No account is registered with this email.");
+                    return View(model);
+                }
+
+                // If there is a valid user
+                // Check for password
+                var result = await _signInManager.PasswordSignInAsync(user, model.Password, true, false);
+
+                // if it's a successfull sign-in
+                if (result.Succeeded)
+                {
+                    return Redirect("/");
+                }
+                else
+                {
+                    ModelState.AddModelError("","Password is incorrect.");
+                    return View(model);
+                }
+            }
+            else
+            {
+                // if the model state is not valid, return back the model
+                return View(model);
+            }
+        }
     }
 }
