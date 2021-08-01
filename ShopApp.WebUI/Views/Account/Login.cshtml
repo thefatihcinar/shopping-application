@@ -1,0 +1,44 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section Scripts{
+
+    <script src="~/modules/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/modules/jquery-validation-unobtrusive/dist/jquery.validate.unobtrusive.min.js"></script>
+
+}
+
+<h1>Login</h1>
+<hr />
+
+<form asp-controller="account" asp-action="login" method="post">
+    <div asp-validation-summary="All" class="text-danger">
+
+    </div>
+    <!--Email-->
+    <div class="form-group row">
+        <label asp-for="Email" class="col-md-2 col-form-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Email" value="@Model.Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+    </div>
+    <!--Password-->
+    <div class="form-group row">
+        <label asp-for="Password" class="col-md-2 col-form-label"></label>
+        <div class="col-md-10">
+            <input asp-for="Password" value="" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+    </div>
+    <!--Login Button-->
+    <div class="form-group row">
+        <div class="col-md-10 offset-md-2">
+            <button type="submit" class="btn btn-primary">Login</button>
+        </div>
+    </div>
+</form>
+
