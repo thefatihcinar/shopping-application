@@ -48,6 +48,29 @@ namespace ShopApp.WebUI
             // that has Users and User Roles
             // and use default token providers
 
+            services.Configure<IdentityOptions>( options => {
+
+                /* password options */
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequiredLength = 10;
+                options.Password.RequireNonAlphanumeric = true;
+
+                /* lockout options */
+                options.Lockout.MaxFailedAccessAttempts = 7; // maximum number of trials before lockout
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5); // for how long it should be locked out
+                options.Lockout.AllowedForNewUsers = true;
+
+                /* email options */
+                options.User.RequireUniqueEmail = true; // one email one account
+
+                /* signin options */
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+
+            });
+
             services.AddControllersWithViews();
 
             services.AddAutoMapper(typeof(Startup)); /* Use AutoMapper */
