@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ShopApp.Business.Abstract;
 using ShopApp.Entities;
@@ -10,6 +11,7 @@ using System.Threading.Tasks;
 
 namespace ShopApp.WebUI.Controllers
 {
+    [Authorize]
     [Route("admin")]
     public class AdminController : Controller
     {
