@@ -52,11 +52,11 @@ namespace ShopApp.WebUI
             services.Configure<IdentityOptions>( options => {
 
                 /* password options */
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequiredLength = 10;
-                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireUppercase = false;
+                options.Password.RequiredLength = 1;
+                options.Password.RequireNonAlphanumeric = false;
 
                 /* lockout options */
                 options.Lockout.MaxFailedAccessAttempts = 7; // maximum number of trials before lockout
